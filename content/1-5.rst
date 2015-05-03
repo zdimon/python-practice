@@ -66,4 +66,24 @@
 
     git push -u origin master
 
+
+При загрузке может потребоваться генерация ключей. 
+Сгенерируем локально.
+
+.. code-block:: Bash
+
+    ssh-keygen -t rsa
+
+Скопируем в буфер обмена содержимое файла /home/user/.ssh/id_rsa.
+
+Внесем ключ на сайте git. Settings->SSH keys
+
+
+
+
+
+
+
+
+
     
