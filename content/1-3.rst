@@ -1,0 +1,44 @@
+Установка python и минимума библиотек
+########################################
+
+:date: 2015-02-09
+:tags: python, уроки, курсы
+:slug: 1-3
+:category: Урок 1
+:authors: zdimon77@gmail.con
+
+Заходим на удаленный сервер
+
+.. code-block:: Bash
+
+    ssh root@192.168.1.12
+
+
+Установка файлового менеджера
+
+.. code-block:: Bash
+
+    sudo apt-get install mc 
+
+Установка dev версии python.
+
+.. code-block:: Bash
+
+    sudo apt-get install python-software-properties  python-dev
+
+
+Установка виртуального окружения
+
+.. code-block:: Bash
+
+    sudo apt-get install python-virtualenv
+
+
+Установка установщика пакетов pip
+
+.. code-block:: Bash
+
+    sudo apt-get install python-pip
+
+
+

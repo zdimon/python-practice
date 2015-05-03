@@ -1,0 +1,165 @@
+Работаем с шаблонами
+####################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, templates
+:slug: 3-2
+:category: Урок 3
+:authors: zdimon77@gmail.con
+
+
+Создадим директорию o/blog/templates и поместим туда шаблон home.html со следующим кодом.
+
+.. code-block:: HTML
+
+    <html>
+
+            <title>Hello</title>
+       
+    </html>
+
+
+
+Подключим шаблонизатор в o/blog/views.py и подгрузим шаблон.
+
+
+.. code-block:: Python
+    
+    from django.shortcuts import render
+    from django.http import HttpResponse
+
+    # Create your views here.
+    def home_page(request):
+        return render(request, 'home.html')
+
+Запустим тест.
+
+.. code-block:: Bash
+
+    ./manage.py test
+
+Результат.
+
+.. code-block:: Bash
+
+        raise TemplateDoesNotExist(name)
+    TemplateDoesNotExist: home.html
+
+Джанго не может найти шаблон т.к. мы не подключили (не включили в кортеж INSTALL_APPS ) наше приложение blog в файле o/o/settings.py.
+Сделаем это.
+
+.. code-block:: Python
+ 
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'blog',
+    )
+
+Запуск теста.
+
+.. code-block:: Bash
+
+    ======================================================================
+    FAIL: test_home_page_returns_correct_html (blog.tests.HomePageTest)
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "/home/zdimon/hd/www/o_ve/o/blog/tests.py", line 20, in test_home_page_returns_correct_html
+        self.assertTrue(response.content.endswith(b'</html>'))
+    AssertionError: False is not true
+
+Тест не проходит из за того что мой редактор вставляет символ переноса строки в конце текста. Исправим это строковой ф-цией strip() которая удалит начатьные и замыкающие символы не относящиеся к содержимому.
+
+.. code-block:: Python
+
+    self.assertTrue(response.content.strip().endswith(b'</html>'))
+
+Теперь тест прошел.
+
+.. code-block:: Bash
+
+    Creating test database for alias 'default'...
+    ..
+    ----------------------------------------------------------------------
+    Ran 2 tests in 0.026s
+
+    OK
+
+Допишем наш тест и проверим правильный ли шаблон обрабатывает вьюха.
+Для этого воспользуемся ф-цией  render_to_string из стандартных библиотек джанги.
+
+
+.. code-block:: Python
+
+    from django.template.loader import render_to_string
+
+
+    [...]
+
+        def test_home_page_returns_correct_html(self):
+            request = HttpRequest()
+            response = home_page(request)
+            expected_html = render_to_string('home.html')
+            self.assertEqual(response.content.decode(), expected_html)   
+
+В этом участке мы используем ф-цию .decode() чтоб конвертировать обьект response.content в юникод строку.
+
+Тест прошел. Добавим немного кода в шаблон.
+
+
+.. code-block:: HTML
+
+    <html>
+        <head>
+            <title>Hello</title>
+        </head>
+        <body>
+            <h1>Hello world</h1>
+            <input id="id_new_item" placeholder="Enter a to-do item" />
+            <table id="id_list_table">
+            </table>
+        </body>
+    </html>
+
+Запустим функциональный тест.
+
+.. code-block:: Bash
+
+    ./ft.py
+
+Получаем.
+
+.. code-block:: Bash
+
+    ======================================================================
+    FAIL: test_is_title_ok (__main__.NewVisitorTest)
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "./ft.py", line 38, in test_is_title_ok
+        "New to-do item did not appear in table"
+    AssertionError: New to-do item did not appear in table
+
+    ----------------------------------------------------------------------
+    
+Это означает что тест не нашел в таблице никаких элементов о чем нам и сообщил.
+Cработал этот участок
+
+.. code-block:: Python
+
+        self.assertTrue(
+            any(row.text == '1: Buy peacock feathers' for row in rows),
+            "New to-do item did not appear in table"
+        )
+
+Где функция **any** вернула ложь т.к. rows пуст. Если бы он не был пуст то конструкция 
+
+.. code-block:: Python
+
+    row.text == '1: Buy peacock feathers' for row in rows
+
+проверила атрибут text у каждого элемента списка rows и в случае его неравенства **'1: Buy peacock feathers'** возвратила ложь
+

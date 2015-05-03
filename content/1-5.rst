@@ -1,0 +1,69 @@
+Работаем с репозиторием git
+###########################
+
+:date: 2015-02-08
+:tags: python, уроки, курсы
+:slug: 1-5
+:category: Урок 1
+:authors: zdimon77@gmail.con
+
+
+Регистрируемся на сайте `https://github.com <https://github.com>`_
+Создаем репозиторий.
+
+Установка git.
+
+.. code-block:: Bash
+
+    apt-get install git
+
+Создадим каталог приложения.
+
+.. code-block:: Bash
+
+    mkdir myproject
+
+Инициализация репозитория.
+
+.. code-block:: Bash
+    
+    cd myproject
+    git init
+
+Создадим файл с кодом.
+
+.. code-block:: Bash
+
+    echo 'print "Hello world"' >> hello.py
+
+Добавим файл для комита.
+
+.. code-block:: Bash
+
+    git add .
+
+Просмотрим статус.
+
+.. code-block:: Bash
+
+    git status
+
+Закомитим изменения локально.
+
+.. code-block:: Bash
+
+    git commit -m 'First commit'
+
+Привяжем репозиторий к серверу git.
+
+.. code-block:: Bash
+
+    git remote add origin git@github.com:zdimon/gggg.git
+
+Создадим первую ветку и зальем изменения на сервер.
+
+.. code-block:: Bash
+
+    git push -u origin master
+
+    

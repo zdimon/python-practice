@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Юниттесты</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="zdimon77@gmail.com">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="Python tutorial ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">Python tutorial </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li >
+                    <a href="/category/oshibki.html">
+						<i class="icon-folder-open icon-large"></i>Ошибки
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tips.html">
+						<i class="icon-folder-open icon-large"></i>tips
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-1.html">
+						<i class="icon-folder-open icon-large"></i>Урок 1
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/urok-2.html">
+						<i class="icon-folder-open icon-large"></i>Урок 2
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-3.html">
+						<i class="icon-folder-open icon-large"></i>Урок 3
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Юниттесты">
+                                        Юниттесты
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-2.html"><i class="icon-folder-open"></i>Урок 2</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+</footer><!-- /.post-info -->                </div>
+                <p>Отличие юниттестов от функциональных.</p>
+<ol class="arabic simple">
+<li>Функциональные работают с точки зрения обычного пользователя и включают в себя имитацию действий в браузере.</li>
+<li>Юнит тесты проверяют приложение &quot;изнутри&quot;, работают с точки зрения программиста и могут проверить более &quot;глубокие&quot; участки кода.</li>
+</ol>
+<p>Создадим приложение которое будем тестировать.</p>
+<div class="highlight"><pre>./manage.py startapp blog
+</pre></div>
+<p>Получившееся структура каталогов.</p>
+<img alt="uml diagram" class="uml" src="/images/2a556901.png" />
+<p>Добавим первый 'тупой' тест в <em>tests.py</em>.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="k">class</span> <span class="nc">SmokeTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">test_bad_maths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<p>Запустим.</p>
+<div class="highlight"><pre>./manage.py <span class="nb">test</span>
+</pre></div>
+<p>Видим.</p>
+<div class="highlight"><pre><span class="n">Creating</span> <span class="n">test</span> <span class="n">database</span> <span class="k">for</span> <span class="n">alias</span> <span class="s">&#39;default&#39;</span><span class="o">...</span>
+<span class="n">F</span>
+<span class="o">======================================================================</span>
+<span class="n">FAIL</span><span class="p">:</span> <span class="n">test_bad_maths</span> <span class="p">(</span><span class="n">blog</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">SmokeTest</span><span class="p">)</span>
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="n">test_bad_maths</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="ne">AssertionError</span><span class="p">:</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">3</span>
+
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Ran</span> <span class="mi">1</span> <span class="n">test</span> <span class="ow">in</span> <span class="mf">0.001</span><span class="n">s</span>
+
+<span class="n">FAILED</span> <span class="p">(</span><span class="n">failures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Destroying</span> <span class="n">test</span> <span class="n">database</span> <span class="k">for</span> <span class="n">alias</span> <span class="s">&#39;default&#39;</span><span class="o">...</span>
+</pre></div>
+<p>Теперь проверим существование корневого (начального) урла в проекте Django.
+Для этого импортируем функцию resolve из пакета джанги, которая на вход принимает обозначение url и возвращает функцию (вьюху) которая обрабатывает данный урл.
+Предположем что вьюха называется home_page.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">resolve</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpRequest</span>
+
+<span class="kn">from</span> <span class="nn">blog.views</span> <span class="kn">import</span> <span class="n">home_page</span>
+
+
+<span class="k">class</span> <span class="nc">HomePageTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_root_url_resolves_to_home_page_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">found</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">home_page</span><span class="p">)</span>
+</pre></div>
+<p>Запустим.</p>
+<div class="highlight"><pre>./manage.py <span class="nb">test</span>
+</pre></div>
+<p>Видим.</p>
+<div class="highlight"><pre><span class="o">======================================================================</span>
+ERROR: blog.tests <span class="o">(</span>unittest.loader.ModuleImportFailure<span class="o">)</span>
+----------------------------------------------------------------------
+ImportError: Failed to import <span class="nb">test </span>module: blog.tests
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/usr/lib/python2.7/unittest/loader.py&quot;</span>, line 254, in _find_tests
+    <span class="nv">module</span> <span class="o">=</span> self._get_module_from_name<span class="o">(</span>name<span class="o">)</span>
+  File <span class="s2">&quot;/usr/lib/python2.7/unittest/loader.py&quot;</span>, line 232, in _get_module_from_name
+    __import__<span class="o">(</span>name<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span>, line 5, in &lt;module&gt;
+    from blog.views import home_page
+ImportError: cannot import name home_page
+
+
+----------------------------------------------------------------------
+</pre></div>
+<p>Создадим нечто похожее на ф-цию (вьюху) в фале blog/views.py.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="n">home_page</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+<p>Результат.</p>
+<div class="highlight"><pre><span class="o">======================================================================</span>
+ERROR: test_root_url_resolves_to_home_page_view <span class="o">(</span>blog.tests.HomePageTest<span class="o">)</span>
+----------------------------------------------------------------------
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span>, line 11, in test_root_url_resolves_to_home_page_view
+    <span class="nv">found</span> <span class="o">=</span> resolve<span class="o">(</span><span class="s1">&#39;/&#39;</span><span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 494, in resolve
+    <span class="k">return</span> get_resolver<span class="o">(</span>urlconf<span class="o">)</span>.resolve<span class="o">(</span>path<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 358, in resolve
+    raise Resolver404<span class="o">({</span><span class="s1">&#39;tried&#39;</span>: tried, <span class="s1">&#39;path&#39;</span>: new_path<span class="o">})</span>
+Resolver404: <span class="o">{</span>u<span class="s1">&#39;path&#39;</span>: u<span class="s1">&#39;&#39;</span>, u<span class="s1">&#39;tried&#39;</span>: <span class="o">[[</span>&lt;RegexURLResolver &lt;RegexURLPattern list&gt; <span class="o">(</span>admin:admin<span class="o">)</span> ^admin/&gt;<span class="o">]]}</span>
+
+----------------------------------------------------------------------
+Ran <span class="m">1</span> <span class="nb">test </span>in 0.063s
+</pre></div>
+<p>Этот пример неочевидной ошибки когда причину нужно искать не внизу стека а чуть выше в этом случае raise Resolver404({'tried': tried, 'path': new_path}).
+Что означает что урл нами не описан. Опишем его в файле o/urls.py. Одновременно закомментируем админку т.к. мы ее не используем.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="c"># Examples:</span>
+     <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;blog.views.home_page&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;home&#39;</span><span class="p">),</span>
+    <span class="c"># url(r&#39;^blog/&#39;, include(&#39;blog.urls&#39;)),</span>
+
+    <span class="c">#url(r&#39;^admin/&#39;, include(admin.site.urls)),</span>
+<span class="p">)</span>
+</pre></div>
+<p>Результат</p>
+<div class="highlight"><pre><span class="o">======================================================================</span>
+ERROR: test_root_url_resolves_to_home_page_view <span class="o">(</span>blog.tests.HomePageTest<span class="o">)</span>
+----------------------------------------------------------------------
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span>, line 11, in test_root_url_resolves_to_home_page_view
+    <span class="nv">found</span> <span class="o">=</span> resolve<span class="o">(</span><span class="s1">&#39;/&#39;</span><span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 494, in resolve
+    <span class="k">return</span> get_resolver<span class="o">(</span>urlconf<span class="o">)</span>.resolve<span class="o">(</span>path<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 345, in resolve
+    <span class="nv">sub_match</span> <span class="o">=</span> pattern.resolve<span class="o">(</span>new_path<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 224, in resolve
+    <span class="k">return</span> ResolverMatch<span class="o">(</span>self.callback, args, kwargs, self.name<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 231, in callback
+    self._callback <span class="o">=</span> get_callable<span class="o">(</span>self._callback_str<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/utils/lru_cache.py&quot;</span>, line 101, in wrapper
+    <span class="nv">result</span> <span class="o">=</span> user_function<span class="o">(</span>*args, **kwds<span class="o">)</span>
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/local/lib/python2.7/site-packages/django/core/urlresolvers.py&quot;</span>, line 113, in get_callable
+    <span class="o">(</span>mod_name, func_name<span class="o">))</span>
+ViewDoesNotExist: Could not import blog.views.home_page. View is not callable.
+
+----------------------------------------------------------------------
+Ran <span class="m">1</span> <span class="nb">test </span>in 0.013s
+</pre></div>
+<p>Это значит что home_page - НЕ функция и не может быть вызвана.
+Опишем вьюху как функцию, а не как ничто (None), a как ф-цию которая ничего не делает.</p>
+<p><em>blog/views.py</em></p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="k">def</span> <span class="nf">home_page</span><span class="p">():</span>
+        <span class="k">pass</span>
+</pre></div>
+<p>Результат</p>
+<div class="highlight"><pre>----------------------------------------------------------------------
+Ran <span class="m">1</span> <span class="nb">test </span>in 0.008s
+
+OK
+</pre></div>
+<p>Раз результат положительный - пишем второй тест.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">resolve</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpRequest</span>
+
+<span class="kn">from</span> <span class="nn">lists.views</span> <span class="kn">import</span> <span class="n">home_page</span>
+
+
+<span class="k">class</span> <span class="nc">HomePageTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_root_url_resolves_to_home_page_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">found</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">home_page</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">test_home_page_returns_correct_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">HttpRequest</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;&lt;html&gt;&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;&lt;title&gt;To-Do lists&lt;/title&gt;&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;&lt;/html&gt;&#39;</span><span class="p">))</span>
+</pre></div>
+<p>Тут мы ожидаем получить на странице вот такую разметку</p>
+<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+.....
+   <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
+.....
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>Получаем.</p>
+<div class="highlight"><pre><span class="o">======================================================================</span>
+ERROR: test_home_page_returns_correct_html <span class="o">(</span>blog.tests.HomePageTest<span class="o">)</span>
+----------------------------------------------------------------------
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span>, line 17, in test_home_page_returns_correct_html
+    <span class="nv">response</span> <span class="o">=</span> home_page<span class="o">(</span>request<span class="o">)</span>
+TypeError: home_page<span class="o">()</span> takes no arguments <span class="o">(</span><span class="m">1</span> given<span class="o">)</span>
+
+----------------------------------------------------------------------
+Ran <span class="m">2</span> tests in 0.008s
+
+FAILED <span class="o">(</span><span class="nv">errors</span><span class="o">=</span>1<span class="o">)</span>
+</pre></div>
+<p>Означает что мы ничего не передали в функцию вьюхи, а надо. Передадим ей обьек request который посылает нам браузер.
+Передадим ей request.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>Тест.</p>
+<div class="highlight"><pre><span class="o">======================================================================</span>
+ERROR: test_home_page_returns_correct_html <span class="o">(</span>blog.tests.HomePageTest<span class="o">)</span>
+----------------------------------------------------------------------
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/zdimon/hd/www/o_ve/o/blog/tests.py&quot;</span>, line 18, in test_home_page_returns_correct_html
+    self.assertTrue<span class="o">(</span>response.content.startswith<span class="o">(</span>b<span class="s1">&#39;&lt;html&gt;&#39;</span><span class="o">))</span>
+AttributeError: <span class="s1">&#39;NoneType&#39;</span> object has no attribute <span class="s1">&#39;content&#39;</span>
+
+----------------------------------------------------------------------
+Ran <span class="m">2</span> tests in 0.011s
+
+FAILED <span class="o">(</span><span class="nv">errors</span><span class="o">=</span>1<span class="o">)</span>
+</pre></div>
+<p>Это означает что функция ничего не возвратила (или возвратила объект None). А должна возвратить респонс.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="c"># Create your views here.</span>
+<span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;&lt;html&gt;&lt;title&gt;To-Do lists&lt;/title&gt;&lt;/html&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Тесты позволяют:</p>
+<ul class="simple">
+<li>экономить время в дальнейшем при усложнении проекта</li>
+<li>никогда не заботиться о том что делать следующим шагом</li>
+</ul>
+<p>Усложним немного функциональный тест.
+<em>o/ft.py</em></p>
+<div class="highlight"><pre><span class="c">#!../bin/python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">class</span> <span class="nc">NewVisitorTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_is_title_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">&#39;Hello&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="c"># найдем тег H1 с содержимым</span>
+        <span class="n">header_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s">&#39;h1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">&#39;Hello world&#39;</span><span class="p">,</span> <span class="n">header_text</span><span class="p">)</span>
+
+        <span class="c"># найдем inputbox с атрибутом</span>
+        <span class="n">inputbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&#39;id_new_item&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+                <span class="n">inputbox</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s">&#39;placeholder&#39;</span><span class="p">),</span>
+                <span class="s">&#39;Enter a to-do item&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c"># заполним inputbox</span>
+        <span class="n">inputbox</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s">&#39;Buy peacock feathers&#39;</span><span class="p">)</span>
+
+        <span class="c"># поищем на странице таблицу с заданным текстом</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&#39;id_list_table&#39;</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s">&#39;tr&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="nb">any</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s">&#39;1: Buy peacock feathers&#39;</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">),</span>
+            <span class="s">&quot;New to-do item did not appear in table&quot;</span>
+        <span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&#39;Finish the test!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+<img alt="uml diagram" class="uml" src="/images/4cff3f9f.png" />
+
+                </div><!-- /.entry-content -->
+        </article>
+</section>
+        </div><!--/span-->
+
+               
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

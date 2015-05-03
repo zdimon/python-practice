@@ -1,0 +1,175 @@
+Первая форма
+############
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 3-3
+:category: Урок 3
+:authors: zdimon77@gmail.con
+
+
+
+Добавим форму в шаблон o/blog/templates/home.html
+
+
+.. code-block:: HTML
+
+    <html>
+        <head>
+            <title>Hello</title>
+        </head>
+        <body>
+            <h1>Hello world</h1>
+             <form method="POST">
+                <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+            </form>
+            <table id="id_list_table">
+            </table>
+        </body>
+    </html>
+
+Добавим в функциональный тест **o/ft.py** сабмит формы.
+
+.. code-block:: Python
+
+        from selenium.webdriver.common.keys import Keys
+         [.....]
+        # заполним inputbox 
+        inputbox.send_keys('Buy peacock feathers')
+
+        # Сабмитнем форму и подождем
+
+        inputbox.send_keys(Keys.ENTER)
+        import time
+        time.sleep(10)
+
+Запускаем ФТ и видим В БРАУЗЕРЕ защиту от кроссайтовых атак. Нужно вставить подпись в форму.
+
+.. code-block:: HTML
+
+        [...]
+        <form method="POST">
+            <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+            {% csrf_token %}
+        </form>
+       [...]
+
+
+Напишем юнит тест на сабмит формы.
+
+
+.. code-block:: Python
+
+    def test_home_page_can_save_a_POST_request(self):
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['item_text'] = 'A new list item'
+        response = home_page(request)
+        self.assertIn('A new list item', response.content.decode())
+
+
+Запускаем юнит тест.
+
+.. code-block:: Bash
+    
+    AssertionError: 'A new list item' not found in u'<html>\n   [...]
+
+
+Допишем во вьюхе обработку POST запроса где просто выведем на страницу значение переданного в POST поля.
+
+
+.. code-block:: Python
+
+    def home_page(request):
+        if request.method == 'POST':
+            return HttpResponse(request.POST['item_text'])
+        return render(request, 'home.html')
+
+
+Тест прошел.
+
+Передадим переменную в шаблон django.
+В шаблоне переменные выводятся так {{ var }}.
+Выведем переменную в шаблоне o/blog/templates/home.html
+
+.. code-block:: HTML
+
+        [...]
+        <table id="id_list_table">
+            <tr><td>{{ item }}</td></tr>
+        </table>
+        [...]
+
+
+Допишем юнит тест где проверим вывод этой переменной.
+
+.. code-block:: Python
+
+    def test_home_page_can_save_a_POST_request(self):
+        [...]
+        self.assertIn('A new list item', response.content.decode())
+        expected_html = render_to_string('home.html', {'item': 'New list item'} )
+        self.assertEqual(response.content.decode(),expected_html        
+
+Тут мы получили строку expected_html отпарсив шаблон home.html с переменной item, которая будет вставлена вместо {{ item }} в шаблоне
+
+Запуск теста не проходит потому что мы не передали переменную во вьюхе.
+
+.. code-block:: Bash
+
+        self.assertEqual(response.content.decode(),expected_html)
+    AssertionError: u'A new list item' != u'<html>
+
+Передадим переменную в * o/blog/views.py *
+
+.. code-block:: Python
+
+    def home_page(request):
+        return render(request, 'home.html', { 'item': request.POST.get('item_text', '') })
+
+Юнит тест прошел.
+Запустим функциональный.
+
+.. code-block:: Bash
+
+    ./ft.py
+
+.. code-block:: Bash
+
+    AssertionError: New to-do item did not appear in table
+
+Не очень информативно т.к. мы видим чего нет на странице но не видим что есть. Допилим тест *o/ft.py*.
+
+.. code-block:: Python
+
+        self.assertTrue(
+            any(row.text == 'Buy peacock feathers' for row in rows),
+            "New to-do item did not appear in table its text was: \n %s" % (table.text)
+        )
+
+Теперь лучше.
+
+.. code-block:: Bash
+
+    AssertionError: New to-do item did not appear in table its text was:
+    Buy peacock feathers
+
+Но можно еще лучше!
+
+
+.. code-block:: Python
+
+    self.assertIn('Buy peacock feathers', [row.text for row in rows])
+
+
+.. code-block:: Bash
+
+
+    AssertionError: 'Buy peacock feathers' not found in [u'Buy peacock feathers']
+
+
+
+
+
+
+

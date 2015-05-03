@@ -1,0 +1,221 @@
+Установка Django и первый тест
+##############################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки
+:slug: 2-2
+:category: Урок 2
+:authors: zdimon77@gmail.con
+
+
+
+Создадим папку c виртуальным окружением и активируем его.
+
+
+.. code-block:: Bash
+
+    cd ~
+    virtualenv o_ve
+    cd o_ve
+    source ./bin/activate
+
+Создадим файл с перечнем необходимых пакетов.
+
+.. code-block:: Bash
+
+    vim requirements.txt
+
+Содержимое файла.
+
+.. code-block:: Bash
+
+    Django==1.6
+    selenium==2.44
+    south==1.0
+
+
+Устанавливаем пакеты в ВО.
+
+.. code-block:: Bash
+
+    pip install -r requirements.txt
+
+Пишем первый тест (ft.py).
+
+.. code-block:: Python
+      
+    from selenium import webdriver
+    browser = webdriver.Firefox()
+    browser.get('http://localhost:8088')
+    assert 'To-do' in browser.title
+    browser.quit()
+
+Запускаем тест на выполнение.
+
+.. code-block:: Bash
+
+    python functional_test.py
+
+Создадим пустой проект Django.
+
+.. code-block:: Bash
+
+    django-admin.py startproject o
+
+Получившееся структура каталогов.
+
+.. uml::
+
+    @startsalt
+    {
+    {T
+     + <&folder>o_ve
+     ++ <&folder>o
+     +++ <&folder>o
+     +++ <&file>urls.py
+     +++ <&file>wsgi.py
+     +++ <&file>urls.py
+     +++ <&file>settings.py
+     + <&file>ft.py
+     + <&file>db.sqlite3
+     + <&file>manage.py   
+    }
+    }
+    @endsalt
+
+
+Перейдем в директорию проекта.
+
+.. code-block:: Bash
+
+    cd o
+
+Запустим сервер разработки на порту 8088.
+
+.. code-block:: Bash
+
+    ./manage.py runserver 8088
+
+
+Добавим задержку в тест
+
+.. code-block:: Bash
+
+    from selenium import webdriver
+    browser = webdriver.Firefox()
+    browser.get('http://localhost:8000')
+    browser.implicitly_wait(3)
+    assert 'Welcome to Django blalala' in browser.title
+    browser.quit()
+
+Создадим репозиторий (`как </1-5.html>`_) и запулим файлы в него.
+
+.. code-block:: Bash
+
+    git add .
+    git commit -m 'functional testing'
+    git pull
+
+Создадим ветку.
+
+
+.. code-block:: Bash
+
+    git branch ft1
+    git checkout ft1
+    git push --set-upstream origin ft1
+
+
+Возвратимся в мастер-ветку.
+
+.. code-block:: Bash
+
+    git checkout master
+
+Недостатки.
+
+- браузер остается открытым при провале теста;
+- не информативный вывод об ошибке (нет инфы о реальном значении заголовка);
+
+Завернем код в unittest (унаследуемся) чтоб решить это.
+
+*ft.py*
+
+.. code-block:: Python
+
+    from selenium import webdriver
+    import unittest
+
+    class NewVisitorTest(unittest.TestCase):
+
+        def setUp(self):
+            self.browser = webdriver.Firefox()
+            self.browser.implicitly_wait(3)
+
+        def tearDown(self):
+            self.browser.quit()
+
+        def test_is_title_ok(self):
+            self.browser.get('http://localhost:8000')
+            self.assertIn('Welcome to Django blalala', self.browser.title)
+            self.fail('Finish the test!')
+
+    if __name__ == '__main__':
+        unittest.main()
+
+
+Сделаем скрипт ft.py исполняемым чтоб каждый раз не писать слово python при запуске.
+
+
+.. code-block:: Bash
+
+    chmod +x ft.py
+
+
+Запуск
+
+.. code-block:: Bash
+
+    ./ft.py
+
+Вывод
+
+.. code-block:: Bash
+
+    ======================================================================
+    FAIL: test_is_title_ok (__main__.NewVisitorTest)
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "ft.py", line 15, in test_is_title_ok
+        self.assertIn('Welcome to Django blalala', self.browser.title)
+    AssertionError: 'Welcome to Django blalala' not found in u'Welcome to Django'
+
+    ----------------------------------------------------------------------
+
+
+Комитимся.
+
+
+.. code-block:: Bash
+
+    git diff
+    git commit -a -m 'change ft'
+    git push
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

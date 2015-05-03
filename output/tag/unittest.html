@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Python tutorial - unittest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="zdimon77@gmail.com">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="Python tutorial ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">Python tutorial </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li >
+                    <a href="/category/oshibki.html">
+						<i class="icon-folder-open icon-large"></i>Ошибки
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tips.html">
+						<i class="icon-folder-open icon-large"></i>tips
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-1.html">
+						<i class="icon-folder-open icon-large"></i>Урок 1
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-2.html">
+						<i class="icon-folder-open icon-large"></i>Урок 2
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-3.html">
+						<i class="icon-folder-open icon-large"></i>Урок 3
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/2-3.html">Юниттесты</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-2.html"><i class="icon-folder-open"></i>Урок 2</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Отличие юниттестов от функциональных.</p>
+<ol class="arabic simple">
+<li>Функциональные работают с точки зрения обычного пользователя и включают в себя имитацию действий в браузере.</li>
+<li>Юнит тесты проверяют приложение &quot;изнутри&quot;, работают с точки зрения программиста и могут проверить более &quot;глубокие&quot; участки кода.</li>
+</ol>
+<p>Создадим приложение которое будем тестировать.</p>
+<div class="highlight"><pre>./manage.py startapp blog
+</pre></div>
+<p>Получившееся структура каталогов.</p>
+<img alt="uml diagram" class="uml" src="/images/2a556901.png" />
+<p>Добавим первый ...</p>
+                        <a class="btn primary xsmall" href="/2-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/3-2.html">Работаем с шаблонами</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-3.html"><i class="icon-folder-open"></i>Урок 3</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/templates.html"><i class="icon-tag"></i>templates</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Создадим директорию o/blog/templates и поместим туда шаблон home.html со следующим кодом.</p>
+<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+
+        <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>Подключим шаблонизатор в o/blog/views.py и подгрузим шаблон.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="c"># Create your views here.</span>
+<span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;home ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/3-2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/3-3.html">Первая форма</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-3.html"><i class="icon-folder-open"></i>Урок 3</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Добавим форму в шаблон o/blog/templates/home.html</p>
+<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Hello world<span class="nt">&lt;/h1&gt;</span>
+         <span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;item_text&quot;</span> <span class="na">id=</span><span class="s">&quot;id_new_item&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Enter a to-do item&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+        <span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">&quot;id_list_table&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>Добавим в функциональный тест <strong>o/ft.py</strong> сабмит формы.</p>
+<div class="highlight"><pre><span class="kn">from ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/3-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
+                </section>
+        </div><!--/span-->
+
+               
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

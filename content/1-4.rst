@@ -1,0 +1,107 @@
+Виртуальное окружение и наш первый блог.
+########################################
+
+:date: 2015-02-08
+:tags: python, уроки, курсы
+:slug: 1-4
+:category: Урок 1
+:authors: zdimon77@gmail.con
+
+
+Создание виртуального окружения.
+
+.. code-block:: Bash
+
+    virtualenv ve
+
+Переход в каталог виртуального окружения ВО.
+
+.. code-block:: Bash
+
+    cd ve
+
+Активируем ВО.
+
+.. code-block:: Bash
+
+    source ./bin/activate
+
+
+Создаем файл requirements.txt со списком необходимых пакетов.
+
+
+.. code-block:: Bash
+
+    touch requirements.txt
+
+Содержимое файла.
+
+.. code-block:: Python
+
+    Pelican
+    Markdown
+
+Устанавливаем эти пакеты.
+
+.. code-block:: Bash
+
+    pip install -r requirements.txt
+
+Создадим каталог для проекта.
+
+.. code-block:: Bash
+
+    mkdir site
+    cd site
+
+Создадим проект pelican.
+
+
+.. code-block:: Bash
+
+    pelican-quickstart
+
+Отвечаем на вопросы.
+
+Заходим в каталог с контентом и создадим там пустой файл.
+
+.. code-block:: Bash
+
+    cd content
+    touch index.md
+
+Отредактируем его следующим образом:
+
+.. code-block:: Markdown
+
+    Title: Мой первый пост
+    Date: 2010-12-03 10:20
+    Category: Начало
+
+    Привет мир!
+
+Соберем статику.
+
+.. code-block:: Bash
+    
+    cd ..
+    pelican content
+
+Запустим вэб сервер.
+
+.. code-block:: Bash
+
+    cd output
+    python -m SimpleHTTPServer
+
+Смотрим результат на **http://localhost:8000**.
+
+Документация проекта `http://docs.getpelican.com/en/3.5.0/index.html <http://docs.getpelican.com/en/3.5.0/index.html>`_
+
+Плагины `https://github.com/getpelican/pelican-plugins <https://github.com/getpelican/pelican-plugins>`_
+
+Темы `https://github.com/getpelican/pelican-themes <https://github.com/getpelican/pelican-themes>`_
+
+
+
+

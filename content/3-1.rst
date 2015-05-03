@@ -1,0 +1,13 @@
+Содержание
+##########
+
+:date: 2015-02-11 
+:tags: python, tutorial
+:slug: 3-1
+:category: Урок 3
+:authors: zdimon77@gmail.con
+
+
+
+- `Работаем с шаблонами </3-2.html>`_
+- `Первая форма </3-3.html>`_

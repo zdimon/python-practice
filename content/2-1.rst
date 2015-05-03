@@ -1,0 +1,13 @@
+Содержание
+##########
+
+:date: 2015-02-11 
+:tags: python, tutorial
+:slug: 2-1
+:category: Урок 2
+:authors: zdimon77@gmail.con
+
+
+
+- `Установка Django и первый тест </2-2.html>`_
+- `Юниттесты </2-3.html>`_
