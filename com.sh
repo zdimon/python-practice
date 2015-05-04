@@ -8,4 +8,4 @@ if [ -n "$comment" ]
     else
         git commit -m "commit at $dt"
 fi
-git push  
+git push   
