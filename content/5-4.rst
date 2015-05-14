@@ -1,0 +1,107 @@
+Наследование шаблонов и добавление bootstrap
+############################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 5-4
+:category: Урок 5
+:authors: zdimon77@gmail.con
+
+Качнем архив и распакуем.
+
+.. code-block:: bash
+
+    wget https://github.com/twbs/bootstrap/releases/download/v3.3.2/bootstrap-3.3.2-dist.zip -O b.zip
+    unzip b.zip
+
+Создадим нужные каталоги и скопируем в проект стилевик.
+
+.. code-block:: bash
+
+    mkdir o/blog/static
+    mkdir o/blog/static/css
+    cp ./bootstrap-3.3.2-dist/css/bootstrap.min.css o/blog/static/css/bootstrap.min.css
+
+Создадим новую директорию (o_ve/o/templates) куда добавим главный шаблон base.html.
+
+.. code-block:: bash
+
+    mkdir templates
+    cd templates
+    touch base.html
+
+Содержимое шаблона.
+
+.. code-block:: html
+
+    {% load staticfiles %}
+    <!DOCTYPE html>
+    <html lang="en" >
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Hello{% endblock %}</title>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="{% url 'home' %}">My first blog</a>
+                {% block header %}{% endblock %}
+            </div>
+
+      </div>
+
+
+            <div style="margin: 60px 0 0 10px;">
+                {% block content %}{% endblock %}
+            </div>
+        {% block footer %}{% endblock %}
+    </body>
+    </html>
+
+
+Теперь отредактируем шаблон o/blog/templates/home.html.
+
+
+.. code-block:: html
+
+
+    {% extends 'base.html' %}
+
+    {% block header %}
+        <h1>Home page</h1>
+    {% endblock %}
+
+    {% block content %}
+        <h1>Hello world</h1>
+         <form method="POST">
+            <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+            {% csrf_token %}
+        </form>
+        <table id="id_list_table">
+            {% for item in items %}
+                <tr><td>{{ item.text }}</td></tr>
+            {% endfor %}
+        </table>
+    {% endblock %}
+
+    {% block footer %}
+        <h3>This is footer</h3>
+    {% endblock %}
+
+Тут мы переопределяем содержимое блоков, описанных в родительском шаблоне, от которого мы унаследовались в первой строке.
+
+
+Добавим путь поиска шаблонов в o/o/settings.py.
+
+
+.. code-block:: python
+
+    TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR, "templates"),
+        )
+
+

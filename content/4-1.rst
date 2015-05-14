@@ -1,0 +1,13 @@
+Содержание
+##########
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 4-1
+:category: Урок 4
+:authors: zdimon77@gmail.con
+
+
+
+- `Первая модель и работа с базой. </4-2.html>`_
+- `Редирект, рефакторинг </4-3.html>`_

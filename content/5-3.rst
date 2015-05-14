@@ -1,0 +1,33 @@
+Добавление связанной таблицы
+############################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 5-3
+:category: Урок 5
+:authors: zdimon77@gmail.con
+
+Добавим новую модель в файл o/blog/models.py.
+
+
+.. code-block:: Python
+
+    #coding: utf-8
+    from django.db import models
+
+    class Category(models.Model):
+        name = models.CharField(default='', max_length=250)
+
+    class Item(models.Model):
+        category = models.ForeignKey('Category', verbose_name=u'Категория', null=True, blank=True)
+        text = models.TextField(default='')
+ 
+
+Создадим таблицу.
+
+.. code-block:: Bash
+
+    ./manage.py schemamigration blog --auto
+    ./manage.py migrate
+
+

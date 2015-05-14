@@ -1,0 +1,60 @@
+Более удобные методы юнит тестирования.
+#######################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 5-2
+:category: Урок 5
+:authors: zdimon77@gmail.con
+
+Вместо 
+
+.. code-block:: Python
+
+        self.assertIn('itemey 1', response.content.decode())
+        self.assertIn('itemey 2', response.content.decode())
+
+        пишем
+
+        self.assertContains(response, 'itemey 1')
+        self.assertContains(response, 'itemey 2')
+
+
+Вместо 
+
+.. code-block:: Python
+
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['item_text'] = 'A new list item'
+        response = home_page(request)
+
+Можно воспользоваться более высокоуровневым объектом self.client.
+
+.. code-block:: Python
+
+    response = self.client.get('/blabla')
+    # либо POST
+    response = self.client.post('/', data={'name_var': 'value'})
+
+  
+Разукрашиваем вывод в консоль.
+
+Добавим новый пакет pyrg в o_ve/requirements.txt
+
+.. code-block:: Bash
+
+    Django
+    selenium
+    pyrg
+
+Установим пакет.
+
+.. code-block:: Bash
+
+    pip install -r requirements.txt
+
+Запускаем.
+
+    pyrg manage.py tesr blog
+

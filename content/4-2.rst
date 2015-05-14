@@ -1,0 +1,148 @@
+Первая модель и работа с базой
+################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 4-2
+:category: Урок 4
+:authors: zdimon77@gmail.con
+
+Напишем тест для БД.
+
+
+.. code-block:: Python
+    from blog.models import Item
+    [...]
+    class ItemModelTest(TestCase):
+
+        def test_saving_and_retrieving_items(self):
+            first_item = Item()
+            first_item.text = 'The first (ever) list item'
+            first_item.save()
+
+            second_item = Item()
+            second_item.text = 'Item the second'
+            second_item.save()
+
+            saved_items = Item.objects.all()
+            self.assertEqual(saved_items.count(), 2)
+
+            first_saved_item = saved_items[0]
+            second_saved_item = saved_items[1]
+            self.assertEqual(first_saved_item.text, 'The first (ever) list item')
+            self.assertEqual(second_saved_item.text, 'Item the second')
+
+Тут мы создаем две записи в базе и проверяем их количество и содержимое поля text.
+
+Запустим тест.
+
+.. code-block:: Python
+
+    NameError: global name 'Item' is not defined
+
+Напишем первую модель *o/blog/models.py*
+
+
+.. code-block:: Python
+
+    from django.db import models
+
+    class Item(models.Model):
+        text = models.TextField(default='')
+
+Тест.
+
+.. code-block:: Bash
+
+    django.db.utils.OperationalError: no such table: blog_item
+
+
+
+Создадим таблицы в базе.
+
+
+    ./manage.py schemamigration blog --init
+    ./manage.py migrate
+
+Получившееся структура каталогов.
+
+.. uml::
+
+    @startsalt
+    {
+    {T
+     + <&folder>o_ve
+     ++ <&folder>o
+     +++ <&folder>o
+     +++ <&file>urls.py
+     +++ <&file>wsgi.py
+     +++ <&file>urls.py
+     +++ <&file>settings.py
+     ++ <&folder>blog
+     +++ <&folder>migrations
+     ++++<&file>0001_initial.py
+     +++ <&file>views.py
+     +++ <&file>tests.py
+     +++ <&file>models.py
+     +++ <&file>admin.py   
+     + <&file>ft.py
+     + <&file>db.sqlite3
+     + <&file>manage.py   
+    }
+    }
+    @endsalt
+
+Тест проходит, значит нужно его дописать.
+
+Уберем лишнее.
+
+.. code-block:: Python
+
+        - self.assertIn('A new list item', response.content.decode())
+        - expected_html = render_to_string('home.html', {'item': 'A new list item'} )
+        - self.assertEqual(response.content.decode(),expected_html)
+
+Вместо этого обратимся к базе.
+
+.. code-block:: Python
+    
+    def test_home_page_can_save_a_POST_request(self):
+        [...]
+        response = home_page(request)
+   
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'A new list item') 
+
+        [...]
+
+
+
+Проверим количество записей в таблице и содержимое поля text первого элемента таблицы.
+
+Получаем.
+
+.. code-block:: Bash
+
+    AssertionError: 0 != 1
+
+
+Сохраним запись во вьюхе.
+
+.. code-block:: Python
+
+    from blog.models import Item
+
+    def home_page(request):
+        if request.method == 'POST':
+            item = Item()
+            item.text = request.POST.get('item_text', '')
+            item.save()
+        return render(request, 'home.html')
+
+Тест прошел.
+
+
+
+
+

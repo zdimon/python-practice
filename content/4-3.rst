@@ -1,0 +1,145 @@
+Редирект
+########
+
+:date: 2015-02-11 
+:tags: python, tutorial, уроки, unittest, шаблоны, form
+:slug: 4-3
+:category: Урок 4
+:authors: zdimon77@gmail.con
+
+Напишем юнит тест для проверки редиректа после сабмита формы.
+
+
+.. code-block:: Python
+
+    def test_home_page_redirects_after_POST(self):
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['item_text'] = 'A new list item'
+
+        response = home_page(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
+
+Результат.
+
+.. code-block:: Bash
+
+    AssertionError: 200 != 302
+
+Допишем вьюху.
+
+  
+.. code-block:: Python  
+
+    from django.shortcuts import render, redirect
+    [...]
+    def home_page(request):
+        if request.method == 'POST':
+            item = Item()
+            item.text = request.POST.get('item_text', '')
+            item.save()
+            return redirect('/')
+        return render(request, 'home.html')
+
+Тест проходит.
+
+Рендеринг переменных в шаблоне.
+-------------------------------
+
+Пишем тест в котором создадим пару записей в базе и проверим их отображение на странице.
+
+.. code-block:: Python  
+
+    def test_home_page_displays_all_list_items(self):
+        Item.objects.create(text='itemey 1')
+        Item.objects.create(text='itemey 2')
+
+        request = HttpRequest()
+        response = home_page(request)
+
+        self.assertIn('itemey 1', response.content.decode())
+        self.assertIn('itemey 2', response.content.decode())
+
+
+Тест не проходит.
+
+.. code-block:: Bash
+
+    AssertionError: 'itemey 1' not found in u'<html> [...]
+
+Допишем в шаблоне цикличный вывод записей.
+
+.. code-block:: HTML
+
+            {% for item in items %}
+                <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+            {% endfor %}
+
+Передадим список в шаблон во вьюхе.
+
+.. code-block:: Python  
+
+    def home_page(request):
+    [...]
+    return render(request, 'home.html', {'items': Item.objects.all()})
+
+Тест прошел.
+
+Удобства.
+---------
+
+Оформим ФТ внутри приложения.
+
+Создадим новую директорию o/functional_test и в ней файл __init__.py
+
+.. code-block:: Bash
+
+    mkdir functional_test
+    cd functional_test
+    touch __init__.py
+
+Перенесем в нее файл ft.py под именем test.py.
+
+.. code-block:: Bash
+
+    cd ..
+    mv ft.py functional_test/test.py
+
+Теперь мы можем вызывать функциональные тесты следующей командой.
+
+.. code-block:: Bash
+
+    ./manage.py test functional_test
+
+
+Такая команда выполнит все тесты.
+
+.. code-block:: Bash
+
+    ./manage.py test
+
+
+Так можно вызвать тесты отдельного приложения.
+
+.. code-block:: Bash
+
+    ./manage.py test blog
+
+Что бы не запускать каждый раз веб сервер разработки джанго для функционального тестирования воспользуемся классом LiveServerTestCase пакета from django.test.
+Это предоставит нам переменную self.live_server_url.
+
+
+.. code-block:: Python  
+
+    from django.test import LiveServerTestCase
+    [...]
+    class NewVisitorTest(LiveServerTestCase):
+    [...]
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        self.browser.get(self.live_server_url)
+
+
+
+
