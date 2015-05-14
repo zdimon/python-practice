@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Python tutorial - templates</title>
+    <title>Postgres.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="zdimon77@gmail.com">
@@ -73,7 +73,7 @@
 						<i class="icon-folder-open icon-large"></i>Разное
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/tips.html">
 						<i class="icon-folder-open icon-large"></i>tips
 					</a>
@@ -118,9 +118,20 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/3-2.html">Работаем с шаблонами</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Postgres.">
+                                        Postgres.
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
         <i class="icon-calendar"></i>ср 11 лютий 2015
@@ -128,40 +139,69 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-3.html"><i class="icon-folder-open"></i>Урок 3</a>.
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
 
 
 <span class="label">Tags</span>
 	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
-	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
-	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
-	<a href="/tag/templates.html"><i class="icon-tag"></i>templates</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Создадим директорию o/blog/templates и поместим туда шаблон home.html со следующим кодом.</p>
-<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info -->                </div>
+                <p>sudo apt-get install postgresql</p>
+<p>В боевой системе, где БД будет располагаться на отдельном сервере, требуется указать, на каком интерфейсе принимать соединения (по умолчанию, Postgres слушает только 127.0.0.1).
+Для этого, в файле /etc/postgresql/9.1/main/postgresql.conf добавить строку:
+listen_addresses = '*'</p>
+<p>Также можно оптимизировать настройки производительности (в этом же файле), но, надо иметь в виду, что это потребуется от системы соответствующих объёмов ОЗУ:
+# 512MB would be nice, but Ubuntu 12.04 LTS
+# does not support shared_buffers &gt; 16MB</p>
+<p>shared_buffers = 16MB
+work_mem = 4MB
+maintenance_work_mem = 128MB</p>
+<p>В файле /etc/postgresql/9.1/main/pg_hba.conf добавить строку:
+host    all             all             10.10.100.0/24          md5
+Перезагрузить Postgres:
+sudo service postgresql restart</p>
+<p>Как в боевой, так и в тестовой системе, требуется задать пароль для юзера postgres:
+sudo -u postgres psql postgres
+затем:
+password postgres</p>
+<p>Также, требуется настроить роль для юзера django, под которым будет работать серверный софт, и задать её пароль:
+CREATE ROLE django WITH LOGIN;
+password django</p>
+<p>Создать основную БД в postgresql с помощью pgadmin, либо из консоли:
+sudo -u postgres createdb &lt;имя-базы&gt;</p>
+<div class="section" id="postgersql">
+<h2>Бэкапирование и восстановление БД PostgerSQL, а также перенос её на другой сервер</h2>
+<p>Бэкап БД создаётся штатными средствами PostgreSQL:</p>
+<p>sudo -u postgres pg_dump -F custom pressa &gt; backup-filename.dump</p>
+</div>
+<div class="section" id="id1">
+<h2>Восстановление бэкапа:</h2>
+<p>sudo -u postgres dropdb pressa
+sudo -u postgres createdb pressa
+sudo -u postgres pg_restore -d pressa backup-filename.dump</p>
+<p>Установка</p>
+<p>apt-get install libpq-dev</p>
+<p>sudo pip install psycopg2</p>
+<p>apt-get install build-essential postgresql postgresql-contrib</p>
+<p>creating cluster
+pg_createcluster 9.3 main --start</p>
+<p>sudo nano /etc/postgresql/9.3/main/pg_hba.conf</p>
+<p>host all all 0.0.0.0/0 trust</p>
+<p>sudo nano /etc/postgresql/9.3/main/postgresql.conf
+listen_addresses = '*'</p>
+<p>Change password to postgres user
+passwd postgres
+sudo -s -u postgres
+psql
+password postgres</p>
+<p>Restart server
+service postgresql restart</p>
+</div>
 
-        <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
-
-<span class="nt">&lt;/html&gt;</span>
-</pre></div>
-<p>Подключим шаблонизатор в o/blog/views.py и подгрузим шаблон.</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
-
-<span class="c"># Create your views here.</span>
-<span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;home ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/3-2.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+</section>
         </div><!--/span-->
 
                

@@ -68,5 +68,5 @@ git push -f origin master
 
     git reset HEAD <file>
 
--------
+
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Python tutorial - templates</title>
+    <title>Python tutorial - Разное</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="zdimon77@gmail.com">
@@ -68,7 +68,7 @@
 						<i class="icon-folder-open icon-large"></i>Ошибки
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/raznoe.html">
 						<i class="icon-folder-open icon-large"></i>Разное
 					</a>
@@ -119,7 +119,7 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/3-2.html">Работаем с шаблонами</a></h1>
+                <h1><a href="/nginx.html">Установка и сборка nginx.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -128,32 +128,31 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-3.html"><i class="icon-folder-open"></i>Урок 3</a>.
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
 
 
 <span class="label">Tags</span>
 	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
-	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
-	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
-	<a href="/tag/templates.html"><i class="icon-tag"></i>templates</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>Создадим директорию o/blog/templates и поместим туда шаблон home.html со следующим кодом.</p>
-<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
-
-        <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
-
-<span class="nt">&lt;/html&gt;</span>
+                <div class="summary"><p>Забираем ключик.</p>
+<div class="highlight"><pre>mkdir nginx_source
+<span class="nb">cd </span>nginx_source
+wget http://nginx.org/keys/nginx_signing.key
 </pre></div>
-<p>Подключим шаблонизатор в o/blog/views.py и подгрузим шаблон.</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
-
-<span class="c"># Create your views here.</span>
-<span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;home ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/3-2.html">more ...</a>
+<p>Импортируем его в сисему.</p>
+<div class="highlight"><pre>sudo apt-key add nginx_signing.key
+</pre></div>
+<p>Добавим репу.</p>
+<div class="highlight"><pre>sudo nano /etc/apt/sources.list
+</pre></div>
+<p>В конец файла.</p>
+<div class="highlight"><pre>deb http://nginx.org/packages/ubuntu/ trusty nginx
+deb-src http://nginx.org/packages/ubuntu/ trusty nginx
+</pre></div>
+<p>Получаем ...</p>
+                        <a class="btn primary xsmall" href="/nginx.html">more ...</a>
                 </div>
         </div>
         <hr />

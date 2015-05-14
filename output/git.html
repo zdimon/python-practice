@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Python tutorial - templates</title>
+    <title>Git.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="zdimon77@gmail.com">
@@ -73,7 +73,7 @@
 						<i class="icon-folder-open icon-large"></i>Разное
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/tips.html">
 						<i class="icon-folder-open icon-large"></i>tips
 					</a>
@@ -118,9 +118,20 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-        <div class="article">
-                <h1><a href="/3-2.html">Работаем с шаблонами</a></h1>
-                <div class="well small"><footer class="post-info">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Git.">
+                                        Git.
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
         <i class="icon-calendar"></i>ср 11 лютий 2015
@@ -128,40 +139,48 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-3.html"><i class="icon-folder-open"></i>Урок 3</a>.
+<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
 
 
 <span class="label">Tags</span>
 	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
-	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
-	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
-	<a href="/tag/templates.html"><i class="icon-tag"></i>templates</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Создадим директорию o/blog/templates и поместим туда шаблон home.html со следующим кодом.</p>
-<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
-
-        <span class="nt">&lt;title&gt;</span>Hello<span class="nt">&lt;/title&gt;</span>
-
-<span class="nt">&lt;/html&gt;</span>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info -->                </div>
+                <p>Ситуация когда у вас уже есть клон репозитория с которым вы работаете, делаете pull и смотрите что там какая то фигня накоммитчена от разработчиков.</p>
+<p>Выбираем нужный бранч(ветку), у меня она master
+git checkout master</p>
+<p>делаем откат изменений в репозитории для примера на два коммита назад
+git reset --hard HEAD~2</p>
+<p>Можно сделать до какого то определенного коммита по хешу
+git reset --hard hash
+Хеш можно взять в вебинтерфейсе гитхаба.</p>
+<p>Далее делаем принудительный коммит в основной репо на гитхабе
+git push -f origin master
+без -f будет ругаться что у вас версия младше чем в гитхабе и вам надо сделать pull</p>
+<p>Создание меток для отметки важных моментов.</p>
+<div class="highlight"><pre>git tag -a v1.4 -m <span class="s1">&#39;my version 1.4&#39;</span>
 </pre></div>
-<p>Подключим шаблонизатор в o/blog/views.py и подгрузим шаблон.</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<p>Просмотр меток.</p>
+<div class="highlight"><pre>git tag
+</pre></div>
+<p>Отметка уже пройденного комита</p>
+<div class="highlight"><pre>git tag -a v1.2 -m <span class="s1">&#39;version 1.2&#39;</span> 9fceb02
+</pre></div>
+<p>По умолчанию, команда git push не отправляет метки на удалённые серверы. Необходимо явно отправить (push) метки на общий сервер после того, как вы их создали. Это делается так же, как и выкладывание в совместное пользование удалённых веток — нужно выполнить git push origin [имя метки].</p>
+<p>Или так</p>
+<div class="highlight"><pre><span class="nv">$ </span>git push origin --tags
+</pre></div>
+<p>Изменение последнего коммита</p>
+<div class="highlight"><pre>git commit --amend
+</pre></div>
+<p>Убрать файл из индексации.</p>
+<div class="highlight"><pre>git reset HEAD &lt;file&gt;
+</pre></div>
 
-<span class="c"># Create your views here.</span>
-<span class="k">def</span> <span class="nf">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;home ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/3-2.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
-                </section>
+                </div><!-- /.entry-content -->
+        </article>
+</section>
         </div><!--/span-->
 
                

@@ -68,6 +68,11 @@
 						<i class="icon-folder-open icon-large"></i>Ошибки
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/raznoe.html">
+						<i class="icon-folder-open icon-large"></i>Разное
+					</a>
+                  </li>
                   <li class="active">
                     <a href="/category/tips.html">
 						<i class="icon-folder-open icon-large"></i>tips
@@ -88,6 +93,16 @@
 						<i class="icon-folder-open icon-large"></i>Урок 3
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/urok-4.html">
+						<i class="icon-folder-open icon-large"></i>Урок 4
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-5.html">
+						<i class="icon-folder-open icon-large"></i>Урок 5
+					</a>
+                  </li>
 
                           <ul class="nav pull-right">
                                 <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -103,6 +118,152 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/email.html">Работа с почтой</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>from django.core.mail import send_mail
+send_mail(&quot;test subject&quot;, &quot;test message&quot;, from_email=&quot;<a class="reference external" href="mailto:zdimon77&#64;gmail.com">zdimon77&#64;gmail.com</a>&quot;, recipient_list=[&quot;<a class="reference external" href="mailto:zdimon77&#64;gmail.com">zdimon77&#64;gmail.com</a>&quot;])</p>
+
+                        <a class="btn primary xsmall" href="/email.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/git.html">Git.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Ситуация когда у вас уже есть клон репозитория с которым вы работаете, делаете pull и смотрите что там какая то фигня накоммитчена от разработчиков.</p>
+<p>Выбираем нужный бранч(ветку), у меня она master
+git checkout master</p>
+<p>делаем откат изменений в репозитории для примера на два коммита назад
+git reset --hard HEAD ...</p>
+                        <a class="btn primary xsmall" href="/git.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/messages.html">Messages.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>'django.contrib.messages' is in INSTALLED_APPS.</p>
+<div class="highlight"><pre>from django.contrib import messages
+messages.add_message<span class="o">(</span>request, messages.INFO, <span class="s1">&#39;Hello world.&#39;</span><span class="o">)</span>
+
+
+
+            <span class="o">{</span>% <span class="k">for</span> message in messages %<span class="o">}</span>
+            &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;alert alert-{{ message.tags }}&quot;</span>&gt;
+                    <span class="o">{{</span> message <span class="o">}}</span>
+            &lt;/div&gt;
+            <span class="o">{</span>% endfor %<span class="o">}</span>
+</pre></div>
+<div class="highlight"><pre> <span class="nc">.infIn</span> <span class="p">{</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
+  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
+  <span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/messages.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/postgres.html">Postgres.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>sudo apt-get install postgresql</p>
+<p>В боевой системе, где БД будет располагаться на отдельном сервере, требуется указать, на каком интерфейсе принимать соединения (по умолчанию, Postgres слушает только 127.0.0.1).
+Для этого, в файле /etc/postgresql/9.1/main/postgresql.conf добавить строку:
+listen_addresses = '*'</p>
+<p>Также можно оптимизировать настройки производительности (в ...</p>
+                        <a class="btn primary xsmall" href="/postgres.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/protection.html">Protection.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><dl class="docutils">
+<dt>def hello(name):</dt>
+<dd>print('Hello {0}'.format(name))</dd>
+</dl>
+<p>cython hello.py -o hello.c
+gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -fno-strict-aliasing -I/usr/include/python2.7 -o hello.so hello.c</p>
+
+                        <a class="btn primary xsmall" href="/protection.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/tips.html">Tips</a></h1>
                 <div class="well small"><footer class="post-info">

@@ -10,10 +10,10 @@ Messages.
 
 'django.contrib.messages' is in INSTALLED_APPS.
 
+.. code-block:: bash
 
-
-from django.contrib import messages
-messages.add_message(request, messages.INFO, 'Hello world.')
+                from django.contrib import messages
+                messages.add_message(request, messages.INFO, 'Hello world.')
 
 
 

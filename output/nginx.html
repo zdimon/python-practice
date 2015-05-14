@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Работаем с репозиторием git</title>
+    <title>Установка и сборка nginx.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="zdimon77@gmail.com">
@@ -68,7 +68,7 @@
 						<i class="icon-folder-open icon-large"></i>Ошибки
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/raznoe.html">
 						<i class="icon-folder-open icon-large"></i>Разное
 					</a>
@@ -78,7 +78,7 @@
 						<i class="icon-folder-open icon-large"></i>tips
 					</a>
                   </li>
-                  <li class="active">
+                  <li >
                     <a href="/category/urok-1.html">
 						<i class="icon-folder-open icon-large"></i>Урок 1
 					</a>
@@ -124,8 +124,8 @@
                         <h1>
                                 <a href=""
                                         rel="bookmark"
-                                        title="Permalink to Работаем с репозиторием git">
-                                        Работаем с репозиторием git
+                                        title="Permalink to Установка и сборка nginx.">
+                                        Установка и сборка nginx.
                                 </a>
                         </h1>
                 </header>
@@ -133,56 +133,110 @@
                 <div class="well">
 <footer class="post-info">
 <span class="label">Date</span>
-<abbr class="published" title="2015-02-08T00:00:00+01:00">
-        <i class="icon-calendar"></i>нд 08 лютий 2015
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
 </abbr>
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-1.html"><i class="icon-folder-open"></i>Урок 1</a>.
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
 
 
 <span class="label">Tags</span>
 	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
-	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
-	<a href="/tag/kursy.html"><i class="icon-tag"></i>курсы</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info -->                </div>
-                <p>Регистрируемся на сайте <a class="reference external" href="https://github.com">https://github.com</a>
-Создаем репозиторий.</p>
-<p>Установка git.</p>
-<div class="highlight"><pre>apt-get install git
+                <p>Забираем ключик.</p>
+<div class="highlight"><pre>mkdir nginx_source
+<span class="nb">cd </span>nginx_source
+wget http://nginx.org/keys/nginx_signing.key
 </pre></div>
-<p>Создадим каталог приложения.</p>
-<div class="highlight"><pre>mkdir myproject
+<p>Импортируем его в сисему.</p>
+<div class="highlight"><pre>sudo apt-key add nginx_signing.key
 </pre></div>
-<p>Инициализация репозитория.</p>
-<div class="highlight"><pre><span class="nb">cd </span>myproject
-git init
+<p>Добавим репу.</p>
+<div class="highlight"><pre>sudo nano /etc/apt/sources.list
 </pre></div>
-<p>Создадим файл с кодом.</p>
-<div class="highlight"><pre><span class="nb">echo</span> <span class="s1">&#39;print &quot;Hello world&quot;&#39;</span> &gt;&gt; hello.py
+<p>В конец файла.</p>
+<div class="highlight"><pre>deb http://nginx.org/packages/ubuntu/ trusty nginx
+deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 </pre></div>
-<p>Добавим файл для комита.</p>
-<div class="highlight"><pre>git add .
+<p>Получаем исходники.</p>
+<div class="highlight"><pre>sudo apt-get update
+sudo apt-get <span class="nb">source </span>nginx_signing
 </pre></div>
-<p>Просмотрим статус.</p>
-<div class="highlight"><pre>git status
+<p>Download rtmp module.</p>
+<blockquote>
+git clone <a class="reference external" href="https://github.com/arut/nginx-rtmp-module.git">https://github.com/arut/nginx-rtmp-module.git</a></blockquote>
+<p>Install pcre3 and others.</p>
+<blockquote>
+sudo apt-get install libpcre3 libpcre3-dev libssl-dev libxml2-dev libxslt-dev</blockquote>
+<p>Сompille.</p>
+<div class="highlight"><pre><span class="nb">cd </span>nginx-1.6.2
+sudo ./configure --with-cc-opt<span class="o">=</span><span class="s1">&#39;-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2&#39;</span> --with-ld-opt<span class="o">=</span><span class="s1">&#39;-Wl,-Bsymbolic-functions -Wl,-z,relro&#39;</span> --prefix<span class="o">=</span>/usr/share/nginx --conf-path<span class="o">=</span>/etc/nginx/nginx.conf --http-log-path<span class="o">=</span>/var/log/nginx/access.log --error-log-path<span class="o">=</span>/var/log/nginx/error.log --lock-path<span class="o">=</span>/var/lock/nginx.lock --pid-path<span class="o">=</span>/run/nginx.pid --http-client-body-temp-path<span class="o">=</span>/var/lib/nginx/body --http-fastcgi-temp-path<span class="o">=</span>/var/lib/nginx/fastcgi --http-proxy-temp-path<span class="o">=</span>/var/lib/nginx/proxy --http-scgi-temp-path<span class="o">=</span>/var/lib/nginx/scgi --http-uwsgi-temp-path<span class="o">=</span>/var/lib/nginx/uwsgi --with-debug --with-pcre-jit --with-ipv6 --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_addition_module --with-http_dav_module --with-http_gzip_static_module --with-http_spdy_module --with-http_sub_module --with-http_xslt_module --with-mail --with-mail_ssl_module --add-module<span class="o">=</span>../nginx-rtmp-module
+
+sudo make
 </pre></div>
-<p>Закомитим изменения локально.</p>
-<div class="highlight"><pre>git commit -m <span class="s1">&#39;First commit&#39;</span>
+<p>Copy binary file to system folder</p>
+<blockquote>
+cp obj/nginx usr/sbin</blockquote>
+<p>sudo nano /etc/nginx/sites-available/default</p>
+<div class="highlight"><pre>   upstream chatserver <span class="o">{</span>
+        server 127.0.0.1:9999<span class="p">;</span>
+    <span class="o">}</span>
+
+server <span class="o">{</span>
+        <span class="c"># Requires root access.</span>
+        listen       80<span class="p">;</span>
+        server_name socket.course.localhost<span class="p">;</span>
+
+        <span class="c"># WebSocket.</span>
+        location /echo/info <span class="o">{</span>
+            proxy_pass http://chatserver<span class="p">;</span>
+            proxy_http_version 1.1<span class="p">;</span>
+            proxy_set_header Upgrade <span class="nv">$http_upgrade</span><span class="p">;</span>
+            proxy_set_header Connection <span class="s2">&quot;upgrade&quot;</span><span class="p">;</span>
+        <span class="o">}</span>
+
+        location / <span class="o">{</span>
+            proxy_pass http://chatserver<span class="p">;</span>
+        <span class="o">}</span>
+
+
+    <span class="o">}</span>
+
+  sudo nano /etc/nginx/nginx.conf
+
+
+rtmp <span class="o">{</span>
+
+    server <span class="o">{</span>
+
+        listen 1935<span class="p">;</span>
+
+        chunk_size 4000<span class="p">;</span>
+
+        <span class="c"># TV mode: one publisher, many subscribers</span>
+        application mytv <span class="o">{</span>
+
+            <span class="c"># enable live streaming</span>
+            live on<span class="p">;</span>
+
+            <span class="c"># record first 1K of stream</span>
+            record all<span class="p">;</span>
+            record_path /tmp<span class="p">;</span>
+
+
+            <span class="c"># append current timestamp to each flv</span>
+            record_unique on<span class="p">;</span>
+
+
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
 </pre></div>
-<p>Привяжем репозиторий к серверу git.</p>
-<div class="highlight"><pre>git remote add origin git@github.com:zdimon/gggg.git
-</pre></div>
-<p>Создадим первую ветку и зальем изменения на сервер.</p>
-<div class="highlight"><pre>git push -u origin master
-</pre></div>
-<p>При загрузке может потребоваться генерация ключей.
-Сгенерируем локально.</p>
-<div class="highlight"><pre>ssh-keygen -t rsa
-</pre></div>
-<p>Скопируем в буфер обмена содержимое файла /home/user/.ssh/id_rsa.</p>
-<p>Внесем ключ на сайте git. Settings-&gt;SSH keys</p>
 
                 </div><!-- /.entry-content -->
         </article>
