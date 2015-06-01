@@ -1,0 +1,15 @@
+Содержание
+##########
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 9-1
+:category: Урок 9
+:authors: zdimon77@gmail.con
+
+
+
+- `Деплой проекта на удаленный сервер. </9-2.html>`_ 
+- `Flatpages and flatblocks. </9-3.html>`_ 
+- `Sitemap. </9-4.html>`_ 
+- `Celery. </9-5.html>`_ 

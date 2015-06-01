@@ -1,0 +1,329 @@
+Регистрация
+###########
+
+:date: 2015-02-10
+:tags: python, модули, авторизация
+:slug: 6-3
+:category: Урок 6
+:authors: zdimon77@gmail.con
+
+
+Пишем тест, ожидающий код формы на странице. Создадим новый файл *o/functional_test/test_registration.py*.
+
+.. code-block:: Python
+
+    
+    #!../bin/python
+    # -*- coding: utf-8 -*-
+    from .base import BaseTest
+    import time
+
+    class RegistrationTest(BaseTest):
+
+        def test_registration_form_html(self):
+            # Edith goes to the home page
+            self.browser.get(self.live_server_url)
+            self.browser.find_element_by_id('registration').click()
+            username = self.browser.find_element_by_name('username')
+            password = self.browser.find_element_by_name('password')
+            email = self.browser.find_element_by_name('password')
+
+
+Пропишем роутинг из пакета registrations.
+
+.. code-block:: Python
+
+    url(r'^accounts/', include('registrations.backends.default.urls')),
+
+Поставим линк на форму регистрации в базовом шаблоне base.html.
+
+.. code-block:: html
+
+       {% if user.is_authenticated %}
+           <a id="logout" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a id="registration" class="btn btn-success" href="{% url 'registration_register' %}">Registration</a>
+
+
+Добавим пакет django-widget-tweaks==1.3 в requirements.txt и установим его командой pip install -r requirements.txt.
+Добавим этот плагин в INSTALL_APPS
+
+.. code-block:: Python
+
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        [...]
+        'widget_tweaks',
+
+    )
+
+
+Теперь мы имеем возможность устанавливать css класс виджету формы используя фильтр вот так.
+
+
+.. code-block:: html
+
+    {{ form.username|add_class:"form-control" }}
+
+
+Остался шаблон формы. Добавим файл o/templates/registration/registration_form.html со следующим кодом.
+
+.. code-block:: html
+
+    {% extends "base.html" %}
+    {% block content %}
+    {% load i18n %}
+    {% load widget_tweaks %}
+
+
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 login-signup-page">
+
+
+                 <ul class='errorlist'>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            {% if field == '__all__' %}
+                            <li>{{ error }}</li>
+                            {% endif %}
+                        {% endfor %}
+                     {% endfor %}
+                 </ul>
+
+
+                <form method="post" action="">
+                    <h2>{% trans 'Registration' %}</h2>
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.username.label_tag }}
+                           <div class="input-group">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-user"></i>
+                                </span>
+                               {{ form.username|add_class:"form-control" }}
+                            </div>
+                                 <span class="error-block">{{ form.username.help_text }}</span>
+                                 <span class="help-block">{{ form.username.errors }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.email.label_tag }}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon-envelope"></i>
+                                </span>
+                               {{ form.email|add_class:"form-control" }}
+                            </div>
+                            <span class="error-block">{{ form.email.help_text }}</span>
+                            <span class="help-block">{{ form.email.errors }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.password1.label_tag }}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                   <i class="fa fa-key"></i>
+                                </span>
+                                  {{ form.password1|add_class:"form-control" }}
+                            </div>
+                                 <span class="error-block">{{ form.password1.help_text }}</span>
+                                 <span class="help-block">{{ form.password1.errors }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.password2.label_tag }}
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                       {{ form.password2|add_class:"form-control" }}
+
+                                 </div>
+                                 <span class="error-block">{{ form.password2.help_text }}</span>
+                                 <span class="help-block">{{ form.password2.errors }}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.gender.label_tag }}
+
+                                {{ form.gender|add_class:"form-control" }}
+                                <span class="help-block">{{ form.gender.errors }}</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            {{ form.birthday.label_tag }}
+
+                                <div class="input-group">
+
+                                       {{ form.birthday|add_class:"form-control input-small" }}
+
+                                 </div>
+                                 <span class="error-block">{{ form.birthday.help_text }}</span>
+                                 <span class="help-block">{{ form.birthday.errors }}</span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn theme-btn">{% trans 'Registration' %}</button>
+                            </div>
+                        </div>
+
+                </form>
+
+      </div>
+
+    {% endblock %}
+
+Можно попробовать django-crispy-forms.
+
+Можно для красоты добавить подсветку ошибок валидации.
+
+.. code-block:: html
+
+    <div class="input-group {%if form.password1.errors %}alert alert-danger{%endif%}">
+
+Вот как получилось
+
+.. image:: /images/6/1.png
+    :alt: 1
+    :width: 700px
+
+
+Проверим успешную регистрацию.
+
+.. code-block:: Python
+
+    def test_registration_form_submit(self):
+        # test success registration
+        self.browser.get(self.live_server_url)
+        self.browser.find_element_by_id('registration').click()
+        username = self.browser.find_element_by_id('id_username').send_keys('username')
+        password1 = self.browser.find_element_by_id('id_password1').send_keys('111')
+        password2 = self.browser.find_element_by_id('id_password2').send_keys('111')
+        email = self.browser.find_element_by_id('id_email').send_keys('ddd@sss.ss')
+        self.browser.find_element_by_id('registration_save').click()
+        rows = self.browser.find_elements_by_tag_name('div')
+        self.assertIn('Please check out your email.', [row.text for row in rows])
+
+Добавим переменную ACCOUNT_ACTIVATION_DAYS в settings.py что от нас требует пакет registration.
+
+.. code-block:: python
+
+    ACCOUNT_ACTIVATION_DAYS = 3
+
+Добавим бекенд для писем чтоб сохранять их в каталог вместо отсылки.
+
+.. code-block:: python
+
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = 'functional_test/email'
+    
+
+Добавим в файл .gitignore каталог functional_test/email чтобы гит игнорировал его содержимое.
+
+.. code-block:: bash
+
+    echo functional_test/email >> .gitignore
+
+
+Добавим шаблон для письма и  заголовка письма.
+
+- o/templates/registration/activation_email_subject.txt
+
+.. code-block:: html
+
+    Activate your account.
+
+
+- o/templates/registration/activation_email.txt
+
+.. code-block:: html
+
+    Registration
+    To finish your registration follow this link please:
+    <a href="http://{{ site }}/accounts/activate/{{ activation_key }}/">Activation link </a>
+
+
+
+.. code-block:: html
+
+    {% extends "base.html" %}
+
+    {% block content %}
+        <div class="alert alert-danger">Please check out your email.</div>
+    {% endblock %}
+
+
+
+Добавим шаблон o/templates/registration/registration_complete.html
+
+.. code-block:: html
+
+    {% extends "base.html"  %}
+
+    {% block content %}
+        <div class="well">
+            <h1>'Registration was completed'</h1>
+
+        </div>
+    {% endblock %}
+
+
+Добавим 'заглушку' для отправки емейла.
+
+.. code-block:: python
+
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = 'functional_test/email'
+
+Тест прошел. Допишем проход по ссылке активации и проверку фразы 'Thank you!'.
+
+        self.assertIn('Please check out your email.', [row.text for row in rows])
+        from registration.models import RegistrationProfile
+        pr = RegistrationProfile.objects.first()
+        link = self.live_server_url+'/accounts/activate/'+pr.activation_key+'/'
+        self.browser.get(link)
+        self.assertIn('Thank you!', self.browser.find_element_by_tag_name('h1').text)
+
+Добавим шаблон успешной активации **o/templates/registration/activation_complete.html**.
+
+.. code-block:: html
+
+    {% extends "base.html" %}
+
+    {% block content %}
+        <h1>Thank you!</h1>
+        <div class="well">Your account was successfully activated<div>
+    {% endblock %}
+
+Тест прошел!
+
+
+
+
+
+
+
+

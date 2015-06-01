@@ -1,0 +1,167 @@
+Боковое меню и страница категории
+#################################
+
+:date: 2015-02-10
+:tags: python, модули, авторизация
+:slug: 7-2
+:category: Урок 7
+:authors: zdimon77@gmail.con
+
+
+Пишем тест на проверку бокового меню с темами блога.
+
+.. code-block:: python
+
+    class BlogTest(TestCase):
+
+        def test_menu(self):
+            Category.objects.create(name='Category 1')
+            Category.objects.create(name='Category 2')
+            request = HttpRequest()
+            response = home_page(request)
+            self.assertContains(response, 'Category 1')
+            self.assertContains(response, 'Category 2')
+
+Напишем первый шаблонный тег который выведет все ссылки на темы блога.
+Создадим каталог где будет код тега.
+
+.. code-block:: bash
+
+    cd blog
+    mkdir templatetags
+    cd templatetags
+    touch __init__.py
+
+Содздадим файл menu.py c содержимым.
+
+.. code-block:: python
+
+    from django import template
+    from blog.models import Category
+    register = template.Library()
+
+    @register.inclusion_tag("menu.html")
+    def menu():
+        out = {}
+        categories = Category.objects.all()
+        out['items'] = categories
+        return out
+
+Создадим шаблон blog/templates/menu.html
+
+.. code-block:: python
+
+    <ul class="nav nav-pills nav-stacked">
+        {% for i in items %}
+            <li>{{ i.name }}</li>
+        {% endfor %}
+    </ul>
+
+Добавим в главный шаблон импорт тега и вывод его содержимого.
+
+.. code-block:: python
+   
+    {% load menu %}
+     [...]
+
+    {% menu %}
+
+Тест прошел, напишем новый на страницу просмотра каталога.
+
+.. code-block:: python
+
+    def test_category(self):
+        from blog.views import catalog_show
+        c1 = Category.objects.create(name='Category 1')
+        c2 = Category.objects.create(name='Category 2')
+        i1 = Item.objects.create(text='item 1', category=c1)
+        i2 = Item.objects.create(text='item 2', category=c2)
+        request = HttpRequest()
+        response = catalog_show(request,c1.pk)
+        self.assertContains(response, 'Category 1')
+
+
+Добавим метод get_absolute_url в модель для возможности выводить ссылку (url) на содержимое категории.
+
+
+.. code-block:: python
+
+    class Category(models.Model):
+        name = models.CharField(default='', max_length=250)
+        def get_absolute_url(self):
+           return reverse("show_category", kwargs={"id": self.pk})
+
+Добавим роутинг в urls.py
+
+.. code-block:: python
+
+    url(r'^catalog/show/(?P<id>[^\.]+).html', 'blog.views.catalog_show', name="catalog_show"),
+
+Создадим вьюху.
+
+.. code-block:: python
+
+    def catalog_show(request,id):
+        return render(request, 'catalog_show.html', {'catalog': Category.objects.get(pk=id)})
+
+
+Создадим шаблон.
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+
+        {% block header %}
+            Home page
+        {% endblock %}
+
+        {% block content %}
+            <h1>My catalog {{catalog.name}}</h1>
+             
+        {% endblock %}
+
+        {% block footer %}
+            <h3>This is footer</h3>
+        {% endblock %}
+
+Поставим ссылку.
+
+
+.. code-block:: html
+
+    <ul class="nav nav-pills nav-stacked">
+        {% for i in cats %}
+            <li><a href="{{ i.get_absolute_url }}">{{ i.name }}</a></li>
+        {% endfor %}
+
+    </ul>
+
+Тест прошел допишем проверку на статью в каталоге.
+
+.. code-block:: python
+
+    self.assertContains(response, 'item 1')
+
+Выберем статьи во вьюхе и передадим в шаблон.
+
+.. code-block:: python
+
+        
+    def catalog_show(request,id):
+        catalog = Category.objects.get(pk=id)
+        items = Item.objects.filter(category = catalog).all()
+        return render(request, 'catalog_show.html', {'catalog': catalog, 'items': items})
+
+Выведем статьи в шаблоне.
+
+.. code-block:: html
+
+    {% block content %}
+        <h1>My catalog {{ catalog.name }}</h1>
+
+        {% for i in items %}
+            {{ i.text }}
+        {% endfor %}
+
+
+

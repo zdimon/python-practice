@@ -1,0 +1,199 @@
+Админка
+#######
+
+:date: 2015-02-10
+:tags: python, модули, авторизация
+:slug: 7-3
+:category: Урок 7
+:authors: zdimon77@gmail.con
+
+
+Напишем функциональный тест на проверку админки.
+
+
+.. code-block:: python
+
+    #!../bin/python
+    # -*- coding: utf-8 -*-
+    from .base import BaseTest
+    import time
+    from django.contrib.auth.models import User
+
+    class AdminTest(BaseTest):
+
+        def setUp(self):
+            # setUp is where you instantiate the selenium webdriver and loads the browser.
+            User.objects.create_superuser(
+                username='admin',
+                password='admin',
+                email='admin@example.com'
+            )
+            super(AdminTest, self).setUp()
+
+        def test_create_user(self):
+            self.browser.get(
+                '%s%s' % (self.live_server_url,  "/admin/")
+            )
+            username = self.browser.find_element_by_id("id_username")
+            username.send_keys("admin")
+            password = self.browser.find_element_by_id("id_password")
+            password.send_keys("admin")
+            self.browser.find_element_by_xpath('//input[@value="Log in"]').click()
+
+            self.browser.get(
+                '%s%s' % (self.live_server_url, "/admin/auth/user/add/")
+            )
+
+
+
+            # Fill the create user form with username and password
+            self.browser.find_element_by_id("id_username").send_keys("test")
+            self.browser.find_element_by_id("id_password1").send_keys("test")
+            self.browser.find_element_by_id("id_password2").send_keys("test")
+
+            # Forms can be submitted directly by calling its method submit
+            self.browser.find_element_by_id("user_form").submit()
+            self.assertIn("Change user", self.browser.title)
+
+
+Включим админку в urls.py.
+
+
+
+.. code-block:: python
+
+
+    from django.conf.urls import patterns, include, url
+    from django.contrib import admin
+
+    admin.autodiscover()
+
+    urlpatterns = patterns('',
+        # Examples:
+         url(r'^$', 'blog.views.home_page', name='home'),
+         url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}, name='logout'),
+         url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+         url(r'^accounts/profile/$', 'blog.views.profile', name='my_profile'),
+         url(r'^accounts/', include('registration.backends.default.urls')),
+         url(r'^catalog/show/(?P<id>[^\.]+).html', 'blog.views.catalog_show', name="catalog_show"),
+
+        # url(r'^blog/', include('blog.urls')),
+
+        url(r'^admin/', include(admin.site.urls)),
+    )
+
+
+
+Добавим в админку наши модели Catalog и Item.
+Для чего поместим следующее в файл blog/admin.py
+
+
+.. code-block:: python
+
+    from django.contrib import admin
+    from blog.models import Category, Item
+    # Register your models here.
+
+    class CategoryAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(Category, CategoryAdmin)
+
+
+    class ItemAdmin(admin.ModelAdmin):
+        pass
+
+    admin.site.register(Item, ItemAdmin)
+
+Тут мы добавили пустые классы чего достаточно для вывода разделов.
+
+.. image:: /images/7/1.png
+    :alt: 1
+    :width: 700px
+
+Зайдем в категории и добавим новую. Получим.
+
+    
+.. image:: /images/7/2.png
+    :alt: 1
+    :width: 700px
+
+Не выводиться название потому что не определен метод (__unicode__), который превращает объект в строку.
+Определим его в модели.
+
+.. code-block:: python
+
+    class Category(models.Model):
+        name = models.CharField(default='', max_length=250)
+        def get_absolute_url(self):
+           return reverse("catalog_show", kwargs={"id": self.pk})
+        def __unicode__(self):
+            return self.name
+
+Теперь видим.
+
+.. image:: /images/7/3.png
+    :alt: 1
+    :width: 700px
+
+
+Зайдем в раздел Item и создадим элемент. 
+
+.. image:: /images/7/4.png
+    :alt: 1
+    :width: 700px
+
+
+Проделаем тот же фокус с моделью Item.
+
+.. code-block:: python
+
+    class Item(models.Model):
+        category = models.ForeignKey('Category', verbose_name=u'Категория', null=True, blank=True)  
+        text = models.TextField(default='')
+        def __unicode__(self):
+            return self.text
+
+
+.. image:: /images/7/5.png
+    :alt: 1
+    :width: 700px
+
+Добавим вывод категорий в список.
+
+.. code-block:: python
+
+    class ItemAdmin(admin.ModelAdmin):
+        list_display = ( 'text', 'category')
+
+Добавим фильтр по категориям и возможность поиска по полю text.
+
+.. code-block:: python
+
+    class ItemAdmin(admin.ModelAdmin):
+        list_display = ( 'text', 'category')
+        list_filter = ('category', )
+        search_fields = ['text']
+
+.. image:: /images/7/6.png
+    :width: 700px
+    :alt: 6
+
+Добавим возможность изменять категорию прямо в списке.
+
+.. code-block:: python
+
+    class ItemAdmin(admin.ModelAdmin):
+        list_display = ( 'text', 'category')
+        list_filter = ('category', )
+        search_fields = ['text']
+        list_editable = [ 'category' ]
+
+.. image:: /images/7/7.png
+    :width: 700px
+    :alt: 6
+
+
+
+
+

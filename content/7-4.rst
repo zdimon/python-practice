@@ -1,0 +1,97 @@
+Виды полей модели.
+##################
+
+:date: 2015-02-10
+:tags: python, модули, авторизация
+:slug: 7-4
+:category: Урок 7
+:authors: zdimon77@gmail.con
+
+Добавим новые виды полей в наши модели (blog/models.py).
+
+
+.. code-block:: python
+
+    #coding: utf-8
+    from django.db import models
+    from django.core.urlresolvers import reverse
+
+
+    class Category(models.Model):
+        name = models.CharField(default='', max_length=250)
+        name_slug = models.CharField(verbose_name='Name slug' ,max_length=250, blank=True)
+        def get_absolute_url(self):
+           return reverse("catalog_show", kwargs={"id": self.pk})
+        def __unicode__(self):
+            return self.name
+
+    class Item(models.Model):
+        category = models.ForeignKey('Category', verbose_name=u'Категория', null=True, blank=True)
+        text = models.TextField(default='')
+        is_published = models.BooleanField(verbose_name='Is published?', default=False)
+        title = models.CharField(verbose_name='Title',max_length=250, blank=True)
+        url = models.URLField(verbose_name='URL', blank=True, null=True, help_text='Start with http://')
+        popularity = models.PositiveIntegerField(verbose_name='Popularity', default=0)
+        contact_email = models.EmailField( verbose_name='Contact email' , blank=True, null=True)
+        price = models.DecimalField( verbose_name='Price', max_digits= 12, decimal_places= 2, default=0.00)
+        name_slug = models.CharField(verbose_name='Name slug' ,max_length=250, blank=True)
+        created = models.DateTimeField(verbose_name='Created at', auto_now_add=True, auto_now=True, blank=True, null=True)
+        published_for = models.DateField(verbose_name='Published for', blank=True, null=True)
+        TYPES = (
+            ('article', 'An article'),
+            ('notice', 'A notice'),
+            ('tip', 'A tip'),
+        )
+        item_type = models.CharField(verbose_name='Type of the item',
+                                        choices=TYPES,
+                                        default='article',
+                                        max_length=7)
+        def __unicode__(self):
+            return self.text
+
+
+Создадим миграцию и применим ее.
+
+
+.. code-block:: bash
+
+    ./manage.py schemamigration blog --auto
+    ./manage.py migrate
+
+Выведем в список админки признак опубликования, дату создания и тип, также сделаем возможность опубликовывать прямо из списка и добавим дату и тип в фильтр.
+
+.. code-block:: python
+
+    class ItemAdmin(admin.ModelAdmin):
+        list_display = ( 'text', 'category', 'item_type', 'is_published', 'created')
+        list_filter = ('category', 'created', 'item_type')
+        search_fields = ['text']
+        list_editable = [ 'category', 'is_published' ]
+
+
+.. image:: /images/7/7.png
+    :width: 700px
+    :alt: 7
+
+
+Вот такая должна быть форма ввода.
+
+
+.. image:: /images/7/8.png
+    :width: 700px
+    :alt: 8
+
+
+
+Отфильтруем на фронтенде (во вьюхе *views.py*) список только тех статей, которые опубликованы.
+Добавим в фильтр условие is_published=True.
+
+.. code-block:: python
+
+    def catalog_show(request,id):
+        catalog = Category.objects.get(pk=id)
+        items = Item.objects.filter(category = catalog, is_published=True).all()
+        return render(request, 'catalog_show.html', {'catalog': catalog, 'items': items})
+
+
+

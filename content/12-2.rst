@@ -1,0 +1,28 @@
+Команда загрузки тестовых данных
+################################
+
+:date: 2015-02-08
+:tags: python, уроки, курсы
+:slug: 12-2
+:category: Урок 12
+:authors: zdimon77@gmail.con
+
+
+Создадим каталог blog/management 
+
+.. code-block:: bash
+
+    cd blog
+    mkdir management
+    touch __init__.py
+
+Создадим под каталог blog/management/commands
+
+    cd management
+    mkdir commands
+    touch __init__.py
+
+
+Сама команда (файл load_data.py).
+
+

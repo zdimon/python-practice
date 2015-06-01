@@ -1,0 +1,57 @@
+Sitemap.
+########
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 9-4
+:category: Урок 9
+:authors: zdimon77@gmail.con
+
+В джанге есть встроенный механизм формирования sitemap.xml
+
+
+Add 'django.contrib.sitemaps' to your INSTALLED_APPS setting.
+
+
+Опишем url.
+
+.. code-block:: python
+
+    [...]
+
+    from django.contrib.sitemaps.views import sitemap
+    from blog.sitemap import BlogSitemap
+
+    sitemaps = {
+        'blog': BlogSitemap,
+    }
+
+
+    urlpatterns = patterns('',
+         [...]
+         url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+         [...]
+    )
+
+
+Создадим класс в номов файле blog/sitemap.py
+
+
+.. code-block:: python
+
+    from django.contrib.sitemaps import Sitemap
+    from blog.models import Item
+
+    class BlogSitemap(Sitemap):
+        changefreq = "never"
+        priority = 0.5
+
+        def items(self):
+            return Item.objects.all()
+
+        def lastmod(self, obj):
+            return obj.created
+
+Проверим по адресу http://localhost:8000/sitemap.xml
+
+

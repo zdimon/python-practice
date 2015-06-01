@@ -8,20 +8,22 @@ Messages.
 :authors: zdimon77@gmail.con
 
 
-'django.contrib.messages' is in INSTALLED_APPS.
+.. code-block:: python
 
-.. code-block:: bash
-
-                from django.contrib import messages
-                messages.add_message(request, messages.INFO, 'Hello world.')
+    'django.contrib.messages' is in INSTALLED_APPS.
 
 
 
-                            {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                                    {{ message }}
-                            </div>
-                            {% endfor %}
+    from django.contrib import messages
+    messages.add_message(request, messages.INFO, 'Hello world.')
+
+
+
+                                {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                </div>
+                                {% endfor %}
 
 
 .. code-block:: css

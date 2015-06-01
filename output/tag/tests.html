@@ -84,6 +84,26 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/urok-2.html">
 						<i class="icon-folder-open icon-large"></i>Урок 2
 					</a>
@@ -103,6 +123,26 @@
 						<i class="icon-folder-open icon-large"></i>Урок 5
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
+					</a>
+                  </li>
 
                           <ul class="nav pull-right">
                                 <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -119,7 +159,7 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/4-1.html">Содержание</a></h1>
+                <h1><a href="/10-1.html">Содержание</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -128,7 +168,7 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-4.html"><i class="icon-folder-open"></i>Урок 4</a>.
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
 
 
 <span class="label">Tags</span>
@@ -137,16 +177,18 @@
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
                 <div class="summary"><ul class="simple">
-<li><a class="reference external" href="/4-2.html">Первая модель и работа с базой.</a></li>
-<li><a class="reference external" href="/4-3.html">Редирект, рефакторинг</a></li>
+<li><a class="reference external" href="/10-2.html">Меняем внешний вид админки.</a></li>
+<li><a class="reference external" href="/10-3.html">Каталог товаров и связь многие-ко-многим.</a></li>
+<li><a class="reference external" href="/10-4.html">Вывод дерева каталогов на фронтенде.</a></li>
+<li><a class="reference external" href="/10-5.html">Работаем с изображениями.</a></li>
 </ul>
 
-                        <a class="btn primary xsmall" href="/4-1.html">more ...</a>
+                        <a class="btn primary xsmall" href="/10-1.html">more ...</a>
                 </div>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/5-1.html">Содержание</a></h1>
+                <h1><a href="/10-2.html">Меняем внешний вид админки</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -155,7 +197,159 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/urok-5.html"><i class="icon-folder-open"></i>Урок 5</a>.
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Будем использовать <a class="reference external" href="https://django-grappelli.readthedocs.org/en/latest/">grapelli</a></p>
+<p>Добавим пакет в requirements.txt</p>
+<div class="highlight"><pre>django-grappelli<span class="o">==</span>2.5.3
+</pre></div>
+<p>Установим.</p>
+<div class="highlight"><pre>pip install -r requirements.txt
+</pre></div>
+<p>Добавим пакет в INSTALLED_APPS  перед 'django.contrib.admin'.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;grappelli&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Добавим роутинг перед url(r'^admin/', include(admin.site.urls)).</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^grappelli/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;grappelli.urls&#39;</span><span class="p">)),</span>
+<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-3.html">Каталог товаров и связь многие-ко-многим.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Для древовидного меню будем использовать <a class="reference external" href="http://django-mptt.github.io/django-mptt/">mptt</a></p>
+<p>Добавим пакет в requirements.txt</p>
+<div class="highlight"><pre>django-mptt<span class="o">==</span>0.5.5
+<span class="nv">pytils</span><span class="o">==</span>0.2.3
+<span class="nv">Pillow</span><span class="o">==</span>2.5.1
+</pre></div>
+<p>Установим.</p>
+<div class="highlight"><pre>pip install -r requirements.txt
+</pre></div>
+<p>Создадим новое приложение</p>
+<div class="highlight"><pre>./manage.py startapp shop
+</pre></div>
+<p>Добавим модуль в INSTALLED_APPS.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="s">&#39;shop&#39;</span><span class="p">,</span>
+    <span class="s">&#39;mptt&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Создадим модель shop/models.py.</p>
+<div class="highlight"><pre><span class="c"># -*- coding: utf-8 ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-4.html">Вывод дерева каталогов на фронтенде.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Создадим шаблонный тег который будет выводить дерево каталогов.</p>
+<p>Создадим новый каталог и в нем файл shop/templatetags/catalog.py</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">shop.models</span> <span class="kn">import</span> <span class="n">Catalog</span>
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="nd">@register.inclusion_tag</span><span class="p">(</span><span class="s">&quot;catalog.html&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog</span><span class="p">():</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="n">Catalog</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">[</span><span class="s">&#39;nodes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">categories</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+<p>Создадим файл __init__ ...</p>
+                        <a class="btn primary xsmall" href="/10-4.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-5.html">Работаем с изображениями.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Добавим необходимые пакеты для работы с изображениями в requirements.txt.</p>
+<div class="highlight"><pre>sorl-thumbnail<span class="o">==</span>11.12
+django-image-cropping<span class="o">==</span>1.0.0
+easy-thumbnails<span class="o">==</span>2.1
+django-resized<span class="o">==</span>0.3.4
+</pre></div>
+<p>Добавим приложения в INSTALL_APPS.</p>
+<div class="highlight"><pre><span class="s">&#39;sorl.thumbnail&#39;</span><span class="p">,</span>
+<span class="s">&#39;easy_thumbnails&#39;</span><span class="p">,</span>
+<span class="s">&#39;image_cropping&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Добавим новую модель с изображениями, привязанными к журналам.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">journal</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Journal&#39;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-5.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/11-1.html">Содержание</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-11.html"><i class="icon-folder-open"></i>Урок 11</a>.
 
 
 <span class="label">Tags</span>
@@ -164,17 +358,18 @@
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
                 <div class="summary"><ul class="simple">
-<li><a class="reference external" href="/5-2.html">Более удобные методы юнит тестирования.</a></li>
-<li><a class="reference external" href="/5-3.html">Добавление связанной таблицы.</a></li>
-<li><a class="reference external" href="/5-4.html">Наследование шаблонов и добавление bootstrap</a></li>
+<li><a class="reference external" href="/11-2.html">Выведем галерею изображений на фронтенде.</a></li>
+<li><a class="reference external" href="/11-3.html">Визуальный редактор в админке.</a></li>
+<li><a class="reference external" href="/11-4.html">Отрабатываем 404 и логируем ошибки.</a></li>
+<li><a class="reference external" href="/11-5.html">Профайл пользователя.</a></li>
 </ul>
 
-                        <a class="btn primary xsmall" href="/5-1.html">more ...</a>
+                        <a class="btn primary xsmall" href="/11-1.html">more ...</a>
                 </div>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/email.html">Работа с почтой</a></h1>
+                <h1><a href="/11-2.html">Выведем галерею изображений на фронтенде.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -183,7 +378,7 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
+<a href="/category/urok-11.html"><i class="icon-folder-open"></i>Урок 11</a>.
 
 
 <span class="label">Tags</span>
@@ -191,80 +386,24 @@
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>from django.core.mail import send_mail
-send_mail(&quot;test subject&quot;, &quot;test message&quot;, from_email=&quot;<a class="reference external" href="mailto:zdimon77&#64;gmail.com">zdimon77&#64;gmail.com</a>&quot;, recipient_list=[&quot;<a class="reference external" href="mailto:zdimon77&#64;gmail.com">zdimon77&#64;gmail.com</a>&quot;])</p>
+                <div class="summary"><p>Исправим шаблон o/shop/templates/shop/journal_detail.html</p>
+<div class="highlight"><pre><span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="p">{{</span> <span class="nb">object</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;well&quot;</span> <span class="o">&gt;</span> <span class="p">{{</span><span class="nb">object</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">}}</span> <span class="p">{{</span> <span class="nb">object</span><span class="o">.</span><span class="n">description</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">object</span><span class="o">.</span><span class="n">image_set</span><span class="o">.</span><span class="n">all</span> <span class="o">%</span><span class="p">}</span>
+       <span class="p">{{</span> <span class="n">i</span><span class="o">.</span><span class="n">thumb</span> <span class="p">}}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
 
-                        <a class="btn primary xsmall" href="/email.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/git.html">Git.</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-02-11T00:00:00+01:00">
-        <i class="icon-calendar"></i>ср 11 лютий 2015
-</abbr>
-<span class="label">By</span>
-<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
-<span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
-	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>Ситуация когда у вас уже есть клон репозитория с которым вы работаете, делаете pull и смотрите что там какая то фигня накоммитчена от разработчиков.</p>
-<p>Выбираем нужный бранч(ветку), у меня она master
-git checkout master</p>
-<p>делаем откат изменений в репозитории для примера на два коммита назад
-git reset --hard HEAD ...</p>
-                        <a class="btn primary xsmall" href="/git.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/messages.html">Messages.</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-02-11T00:00:00+01:00">
-        <i class="icon-calendar"></i>ср 11 лютий 2015
-</abbr>
-<span class="label">By</span>
-<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
-<span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
-	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><p>'django.contrib.messages' is in INSTALLED_APPS.</p>
-<div class="highlight"><pre>from django.contrib import messages
-messages.add_message<span class="o">(</span>request, messages.INFO, <span class="s1">&#39;Hello world.&#39;</span><span class="o">)</span>
-
-
-
-            <span class="o">{</span>% <span class="k">for</span> message in messages %<span class="o">}</span>
-            &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;alert alert-{{ message.tags }}&quot;</span>&gt;
-                    <span class="o">{{</span> message <span class="o">}}</span>
-            &lt;/div&gt;
-            <span class="o">{</span>% endfor %<span class="o">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
-<div class="highlight"><pre> <span class="nc">.infIn</span> <span class="p">{</span>
-  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
-  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
-  <span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s ...</span></pre></div>
-                        <a class="btn primary xsmall" href="/messages.html">more ...</a>
+<img alt="8" src="/images/11/1.png" style="width: 700px;" />
+
+                        <a class="btn primary xsmall" href="/11-2.html">more ...</a>
                 </div>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/nginx.html">Установка и сборка nginx.</a></h1>
+                <h1><a href="/11-3.html">Визуальный редактор в админке.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -273,7 +412,7 @@ messages.add_message<span class="o">(</span>request, messages.INFO, <span class=
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+<a href="/category/urok-11.html"><i class="icon-folder-open"></i>Урок 11</a>.
 
 
 <span class="label">Tags</span>
@@ -281,28 +420,25 @@ messages.add_message<span class="o">(</span>request, messages.INFO, <span class=
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>Забираем ключик.</p>
-<div class="highlight"><pre>mkdir nginx_source
-<span class="nb">cd </span>nginx_source
-wget http://nginx.org/keys/nginx_signing.key
+                <div class="summary"><p>Будем вставлять <a class="reference external" href="https://pypi.python.org/pypi/django-ckeditor-updated">этот</a> редактор.</p>
+<p>Добавим пакет в requirements.txt.</p>
+<div class="highlight"><pre>django-ckeditor-updated<span class="o">==</span>4.4.4
 </pre></div>
-<p>Импортируем его в сисему.</p>
-<div class="highlight"><pre>sudo apt-key add nginx_signing.key
+<p>Установим пакет.</p>
+<div class="highlight"><pre>pip install -r requirements.txt
 </pre></div>
-<p>Добавим репу.</p>
-<div class="highlight"><pre>sudo nano /etc/apt/sources.list
+<p>Add <tt class="docutils literal">ckeditor</tt> to your <tt class="docutils literal">INSTALLED_APPS</tt> setting.</p>
+<p>Установим каталог для аплода файлов в settings.py.</p>
+<div class="highlight"><pre><span class="n">CKEDITOR_UPLOAD_PATH</span> <span class="o">=</span> <span class="s">&quot;uploads/&quot;</span>
 </pre></div>
-<p>В конец файла.</p>
-<div class="highlight"><pre>deb http://nginx.org/packages/ubuntu/ trusty nginx
-deb-src http://nginx.org/packages/ubuntu/ trusty nginx
-</pre></div>
-<p>Получаем ...</p>
-                        <a class="btn primary xsmall" href="/nginx.html">more ...</a>
+<p>Определим там же варианты настроек инструментальной панели и путь к jquery.</p>
+<div class="highlight"><pre><span class="n">CKEDITOR_JQUERY_URL</span> <span class="o">=</span> <span class="s">&#39;//ajax.googleapis ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/11-3.html">more ...</a>
                 </div>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/postgres.html">Postgres.</a></h1>
+                <h1><a href="/11-4.html">Отрабатываем 404 и логируем ошибки.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -311,7 +447,7 @@ deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+<a href="/category/urok-11.html"><i class="icon-folder-open"></i>Урок 11</a>.
 
 
 <span class="label">Tags</span>
@@ -319,17 +455,34 @@ deb-src http://nginx.org/packages/ubuntu/ trusty nginx
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>sudo apt-get install postgresql</p>
-<p>В боевой системе, где БД будет располагаться на отдельном сервере, требуется указать, на каком интерфейсе принимать соединения (по умолчанию, Postgres слушает только 127.0.0.1).
-Для этого, в файле /etc/postgresql/9.1/main/postgresql.conf добавить строку:
-listen_addresses = '*'</p>
-<p>Также можно оптимизировать настройки производительности (в ...</p>
-                        <a class="btn primary xsmall" href="/postgres.html">more ...</a>
+                <div class="summary"><p>Будем вставлять <a class="reference external" href="https://pypi.python.org/pypi/django-ckeditor-updated">этот</a> редактор.</p>
+<p>Добавим настройку логирования в settings.py.</p>
+<div class="highlight"><pre>    <span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s"> </span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(name)s</span><span class="s">.</span><span class="si">%(funcName)s</span><span class="s"> ::: </span><span class="si">%(message)s</span><span class="s">&#39;</span>
+        <span class="p">},</span>
+        <span class="s">&#39;simple&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+
+    <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;null&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span><span class="s">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s">&#39;class&#39;</span><span class="p">:</span><span class="s">&#39;django.utils.log.NullHandler&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+         <span class="s">&#39;file&#39;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;ERROR&#39;</span><span class="p">,</span>
+             <span class="s">&#39;class&#39;</span><span class="p">:</span> <span class="s">&#39;logging.handlers.RotatingFileHandler ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/11-4.html">more ...</a>
                 </div>
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/protection.html">Protection.</a></h1>
+                <h1><a href="/11-5.html">Профайл пользователя.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -338,7 +491,7 @@ listen_addresses = '*'</p>
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+<a href="/category/urok-11.html"><i class="icon-folder-open"></i>Урок 11</a>.
 
 
 <span class="label">Tags</span>
@@ -346,54 +499,36 @@ listen_addresses = '*'</p>
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><dl class="docutils">
-<dt>def hello(name):</dt>
-<dd>print('Hello {0}'.format(name))</dd>
-</dl>
-<p>cython hello.py -o hello.c
-gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -fno-strict-aliasing -I/usr/include/python2.7 -o hello.so hello.c</p>
-
-                        <a class="btn primary xsmall" href="/protection.html">more ...</a>
-                </div>
-        </div>
-        <hr />
-        <div class="article">
-                <h1><a href="/tips.html">Tips</a></h1>
-                <div class="well small"><footer class="post-info">
-<span class="label">Date</span>
-<abbr class="published" title="2015-02-11T00:00:00+01:00">
-        <i class="icon-calendar"></i>ср 11 лютий 2015
-</abbr>
-<span class="label">By</span>
-<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
-<span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
-
-
-<span class="label">Tags</span>
-	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
-	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
-	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
-</footer><!-- /.post-info --></div>
-                <div class="summary"><ul class="simple">
-<li><a class="reference external" href="/tip-1.html">Запуск сервера разработки.</a></li>
-<li><a class="reference external" href="/postgres.html">Работа с postgresql.</a></li>
-<li><a class="reference external" href="/git.html">Работа с git.</a></li>
-<li><a class="reference external" href="/email.html">email</a></li>
-<li><a class="reference external" href="/protection.html">Code protection</a></li>
-<li><a class="reference external" href="/messages.html">Messages</a></li>
-</ul>
-<p>Email about exceptions.</p>
-
-                        <a class="btn primary xsmall" href="/tips.html">more ...</a>
+                <div class="summary"><p>Requirements.</p>
+<div class="highlight"><pre>sorl-thumbnail<span class="o">==</span>11.12
+django-image-cropping<span class="o">==</span>1.0.0
+easy-thumbnails<span class="o">==</span>2.1
+django-resized
+<span class="nv">Pillow</span><span class="o">==</span>2.5.1
+</pre></div>
+<p>Создадим модель пользователя, унаследовав от ждангового класса в blog/models.py.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">easy_thumbnails.files</span> <span class="kn">import</span> <span class="n">get_thumbnailer</span>
+<span class="kn">from</span> <span class="nn">image_cropping</span> <span class="kn">import</span> <span class="n">ImageRatioField</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">UserManager</span>
+<span class="kn">from ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/11-5.html">more ...</a>
                 </div>
         </div>
         <hr />
 
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
-                </section>
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/tag/tests.html">1</a></li>
+                        <li class=""><a href="/tag/tests2.html">2</a></li>
+                        <li class=""><a href="/tag/tests3.html">3</a></li>
+                        <li class=""><a href="/tag/tests4.html">4</a></li>
+                        <li class=""><a href="/tag/tests5.html">5</a></li>
+                        <li class="next"><a href="/tag/tests2.html">Next &rarr;</a></li>
+        </ul>
+        </div>
+
         </div><!--/span-->
 
                

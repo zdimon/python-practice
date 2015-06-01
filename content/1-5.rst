@@ -76,6 +76,10 @@
 
 Скопируем в буфер обмена содержимое файла /home/user/.ssh/id_rsa.
 
+.. code-block:: Bash
+
+    cat /home/user/.ssh/id_rsa     
+
 Внесем ключ на сайте git. Settings->SSH keys
 
 

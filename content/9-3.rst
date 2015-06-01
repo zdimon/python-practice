@@ -1,0 +1,111 @@
+Flatpages and flatblocks.
+#########################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 9-3
+:category: Урок 9
+:authors: zdimon77@gmail.con
+
+Оформим главную и другие статичные страницы с помощью встроенного в джанго приложения flatpage.
+
+Add 'django.contrib.flatpages' to your INSTALLED_APPS setting.
+
+
+Add an entry in your URLconf. For example:
+Заменим ссылку на главную страницу.
+
+.. code-block:: python
+
+    url(r'^$', include('django.contrib.flatpages.urls')),
+
+Add 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware' to your MIDDLEWARE_CLASSES setting.
+
+
+Run the command manage.py syncdb.
+
+Create main page record.
+
+
+.. image:: /images/9/1.png
+    :width: 700px
+
+.. image:: /images/9/2.png
+    :width: 700px
+
+
+
+Add o/templates/flatpages/default.html 
+
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+
+    {% block header %}
+        Home page
+    {% endblock %}
+
+    {% block content %}
+        <h1>{{ flatpage.title }}</h1>
+         <div class="well">
+           {{ flatpage.content }}
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        <h3>This is footer</h3>
+    {% endblock %}
+
+
+Если появиться ошибка Reverse for 'home' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+
+Мы должны заменить ссылки на главную страницу в base.html
+
+.. code-block:: html
+
+    <a href="{% url 'home' %}" > Home </a>
+
+на
+
+.. code-block:: html
+
+    <a href="/" > Home </a>
+
+Добавим ссылки на другие страницы.
+
+.. code-block:: python
+
+    urlpatterns += patterns('django.contrib.flatpages.views',
+        url(r'^about-us/$', 'flatpage', {'url': '/about-us/'}, name='about'),
+        url(r'^license/$', 'flatpage', {'url': '/license/'}, name='license'),
+    )
+
+Добавим страницы в админку.
+
+.. image:: /images/9/3.png
+    :width: 700px
+
+
+Выведем ссылки в базовом шаблоне.
+
+.. code-block:: html
+
+    [...]
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">{% block header %}{% endblock %}</a>
+            <a class="navbar-brand" href="{% url 'about' %}">About us</a>
+            <a class="navbar-brand" href="{% url 'license' %}">License</a>
+        </div>
+           {% if user.is_authenticated %}
+               <a id="logout" href="{% url 'logout' %}" class="btn btn-success pull-right">Logout</a>
+            {% else %}
+
+    [...]
+
+.. image:: /images/9/4.png
+    :width: 700px
+
+
+
+

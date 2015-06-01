@@ -1,0 +1,140 @@
+Теги к статье.
+##############
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 8-4
+:category: Урок 8
+:authors: zdimon77@gmail.con
+
+
+Будем использовать `этот пакет для django <https://github.com/alex/django-taggit>`_ поэтому поэтому пропишем его в файле requirement.txt. 
+
+
+.. code-block:: bash
+
+    Django==1.6
+    south==1.0
+    selenium==2.44
+    pyrg==0.2.6
+    django-registration==1.0
+    django-widget-tweaks==1.3
+    django-taggit==0.12.2
+
+Установим.
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+
+Add "taggit" to your INSTALLED_APPS 
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        [...]
+        'taggit',
+    )
+
+
+Запустим миграцию и создадим таблицу.
+
+.. code-block:: bash
+
+    ./manage.py migrate
+
+Add a TaggableManager to your model and go.
+
+
+.. code-block:: python
+
+
+    from taggit.managers import TaggableManager
+
+    [...]
+
+    class Item(models.Model):
+        category = models.ForeignKey('Category', verbose_name=u'Категория', null=True, blank=True)
+        [...]
+        tags = TaggableManager()
+
+
+.. image:: /images/8/7.png
+    :width: 700px
+
+.. image:: /images/8/8.png
+    :width: 700px
+
+.. image:: /images/8/9.png
+    :width: 700px
+
+Выведем теги на странице. Шаблон *blog/templates/item_show.html*.
+
+.. code-block:: html
+
+         <div class="well">
+            {% for tag in item.tags.all %}
+               <a href="#">{{ tag }}</a>
+            {% endfor %}
+         </div>
+
+
+Зделаем вьюху для вывода всех статей по тегу.
+
+.. code-block:: python
+
+    def item_list_by_tag(request,tag):
+        items = Item.objects.filter(tags__name__in=[tag]).all()
+        return render(request, 'item_list_by_tag.html', { 'items': items, 'tag': tag})
+
+Create template for this view *blog/templates/item_list_by_tag.html*. 
+
+
+.. code-block:: python
+
+    {% extends 'base.html' %}
+
+        {% block header %}
+            Home page
+        {% endblock %}
+
+        {% block content %}
+            <h1>Items by tag "{{ tag }}"</h1>
+
+            {% for i in items %}
+                <div class="well"><a href="{{ i.get_absolute_url }}">{{ i.text }}</a></div>
+            {% endfor %}
+
+        {% endblock %}
+
+        {% block footer %}
+            <h3>This is footer</h3>
+        {% endblock %}
+
+Now we should add a routing for this page in urls.py.
+
+.. code-block:: python
+
+    url(r'^item/list/by/tag/(?P<tag>[^\.]+).html', 'blog.views.item_list_by_tag', name="item_list_by_tag"),
+
+
+Finally let change template item_show.html in tags sections and add the links.
+
+
+.. code-block:: html
+
+        <h3>Теги</h3>
+         <div class="well">
+            {% for tag in item.tags.all %}
+               <a href="{% url 'item_list_by_tag' tag=tag %}">{{ tag }}</a>
+            {% endfor %}
+         </div>
+
+
+.. image:: /images/8/10.png
+    :width: 700px
+
+
+

@@ -1,0 +1,122 @@
+Деплой проекта на удаленный сервер.
+###################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 9-2
+:category: Урок 9
+:authors: zdimon77@gmail.con
+
+Заходим на удаленный сервер по ssh.
+
+.. code-block:: bash
+
+    ssh webmaster@143.235.122.111
+
+Удалим апач (если он есть) и установим nginx.
+
+
+.. code-block:: bash
+
+    sudo apt-get remove apache2
+    sudo apt-get install nginx
+
+Установим виртуальное окружение и дев версию питона.
+
+.. code-block:: bash
+
+    sudo apt-get install python-dev python-virtualenv
+
+Создадим каталог с виртуальным окружением и перейдем в него.
+
+.. code-block:: bash
+
+    virtualenv o_ve
+    cd o_ve
+
+Установим git.
+
+.. code-block:: bash
+
+    sudo apt-get install git 
+
+Клонируем репозиторий.
+
+.. code-block:: bash
+
+    git clone https://github.com/zdimon/o.git
+    
+Активируем ВО.
+
+.. code-block:: bash
+
+    source ../bin/activate
+
+Установим установщик пакетов pip.
+
+.. code-block:: bash
+
+    sudo apt-get install pip
+
+Установим зависимости.
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+Создадим и мигрируем базу.
+
+.. code-block:: bash
+
+    ./manage.py syncdb
+    ./manage.py migrate
+
+Запустим сервер.
+
+.. code-block:: bash
+
+    ./manage.py runserver 0.0.0.0:8080
+
+
+Конфигурируем nginx.
+
+.. code-block:: bash
+
+    vim /etc/nginx/sites-available/default
+
+
+.. code-block:: bash
+
+    server {
+            listen 80 default_server;
+            listen [::]:80 default_server ipv6only=on;
+            server_name mysite-or-localhost.com;
+
+             location / {
+                    proxy_pass         http://188.120.245.97:8080;
+                    proxy_redirect     off;
+                    proxy_set_header   Host             $host;
+                    proxy_set_header   X-Real-IP        $remote_addr;
+                    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+                    client_max_body_size       100m;
+                    client_body_buffer_size    128k;
+                    proxy_connect_timeout      90;
+                    proxy_send_timeout         90;
+                    proxy_read_timeout         90;
+                    proxy_buffer_size          4k;
+                    proxy_buffers              4 32k;
+                    proxy_busy_buffers_size    64k;
+                    proxy_temp_file_write_size 64k;
+            }
+
+              location /static {
+            alias /home/zdimon/ap_ve/ap/static/;
+        }
+
+    location /media {
+            alias /home/zdimon/ap_ve/ap/media/;
+        }
+    }
+
+
+

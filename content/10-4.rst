@@ -1,0 +1,179 @@
+Вывод дерева каталогов на фронтенде.
+####################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 10-4
+:category: Урок 10
+:authors: zdimon77@gmail.con
+
+Создадим шаблонный тег который будет выводить дерево каталогов.
+
+Создадим новый каталог и в нем файл shop/templatetags/catalog.py
+
+.. code-block:: python
+
+    from django import template
+    from shop.models import Catalog
+    register = template.Library()
+
+    @register.inclusion_tag("catalog.html")
+    def catalog():
+        out = {}
+        categories = Catalog.objects.all()
+        out['nodes'] = categories
+        return out
+
+Создадим файл __init__.py в каталоге для того чтоб питон знал что это пакет.
+
+.. code-block:: bash
+
+    touch __init__.py
+
+Create template shop/templates/catalog.html.
+
+.. code-block:: html
+
+    {% load mptt_tags %}
+        <ul>
+            {% recursetree nodes %}
+                <li>
+                    {{ node.name }}
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endrecursetree %}
+        </ul>
+
+Добавим тег в главный шаблон base.html.
+
+.. code-block:: html
+
+    
+    {% load catalog %}
+    [....]
+     <div class="col-md-2">
+        {% menu %}
+        {% catalog %}
+     </div>
+
+
+Выведем ссылки на категории.
+
+.. code-block:: html
+
+    {% load mptt_tags %}
+    <ul>
+        {% recursetree nodes %}
+            <li>
+                <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        <a href="{{ children.get_absolute_url }}">{{ children }}</a>
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
+
+
+Добавим импорт роутинга в основной файл o/urls.py
+
+.. code-block:: python
+    
+    [...]
+    url(r'^shop/', include('shop.urls')),
+    [...]
+
+Добавим роутинг для станицы списка товаров и описания товара shop/urls.py.
+
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    from django.conf.urls import patterns, url
+    from shop.views import JournalDetailView, JournalListView
+
+    urlpatterns = patterns( '',
+        url(r'^category/(?P<slug>[^\.]+).html$', JournalListView.as_view(), name='catalog'),
+        url(r'^journal/(?P<slug>[^\.]+).html$', JournalDetailView.as_view(), name='journal'),
+    )
+
+Сделаем пустые вьюхи на основе универсальных представлений blog/views.py.
+
+.. code-block:: python
+
+    from shop.models import Catalog, Journal
+    from django.views.generic import ListView, DetailView
+
+    class JournalListView(ListView):
+        model = Journal
+
+    class JournalDetailView(DetailView):
+        model = Journal
+
+Создадим шаблон для списка журналов каталога shop/journal_list.html.
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+
+        {% block bredcrumbs %} {% endblock %}
+
+
+        {% block header %}
+            SHOP
+        {% endblock %}
+
+        {% block content %}
+            <h1>My shop</h1>
+
+            {% for i in object_list %}
+                <div class="well"><a href="{{ i.get_absolute_url }}">{{ i.name }}</a></div>
+            {% endfor %}
+
+        {% endblock %}
+
+        {% block footer %}
+            <h3>This is footer</h3>
+        {% endblock %}
+
+
+Переопределим метод получения объекта в классе.
+
+.. code-block:: python
+
+    class JournalDetailView(DetailView):
+        model = Journal
+
+        def get_object(self):
+            object = Journal.objects.get(name_slug=self.kwargs['slug'])
+            return object
+
+
+Создадим шаблон просмотра журнала shop/templates/shop/journal_detail.html
+
+.. code-block:: python
+
+    {% extends 'base.html' %}
+
+        {% block bredcrumbs %} {% endblock %}
+
+
+        {% block header %}
+            SHOP
+        {% endblock %}
+
+        {% block content %}
+            <h1>{{ object.name }}</h1>
+
+        {% endblock %}
+
+        {% block footer %}
+            <h3>This is footer</h3>
+        {% endblock %}
+
+
+

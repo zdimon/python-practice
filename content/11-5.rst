@@ -1,0 +1,296 @@
+Профайл пользователя.
+#####################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 11-5
+:category: Урок 11
+:authors: zdimon77@gmail.con
+
+Requirements.
+
+.. code-block:: bash
+
+    sorl-thumbnail==11.12
+    django-image-cropping==1.0.0
+    easy-thumbnails==2.1
+    django-resized
+    Pillow==2.5.1
+
+Создадим модель пользователя, унаследовав от ждангового класса в blog/models.py.
+
+
+.. code-block:: python
+
+    from django.db import models
+    from easy_thumbnails.files import get_thumbnailer
+    from image_cropping import ImageRatioField
+    from django.contrib.auth.models import User, UserManager
+    from django.utils.safestring import mark_safe
+
+    class UserProfile(User):
+        image = models.ImageField(upload_to='profile_images', verbose_name='Image', blank=True)
+        cropping = ImageRatioField('image', '100x100')
+        def thumb(self): 
+            thumbnail_url = get_thumbnailer(self.image).get_thumbnail({
+                'size': (100, 100),
+                'box': self.cropping,
+                'crop': True,
+            }).url
+            return mark_safe(u'<img src="%s" />' % thumbnail_url)
+        objects = UserManager()
+
+
+    from django.db.models.signals import post_save
+
+    def create_custom_user(sender, instance, created, **kwargs):
+        if created:
+            values = {}
+            for field in sender._meta.local_fields:
+                values[field.attname] = getattr(instance, field.attname)
+            user = UserProfile(**values)
+            user.save()
+
+    post_save.connect(create_custom_user, User)
+
+
+Удалим и пересоздадим базу. При этом отказываясь создавать пользователя т.к. при этой попытке будет ошибка отсутствия таблицы профайла.
+Поэтому перед созданием суперпользователя нужно запустить миграцию.
+
+.. code-block:: bash
+    
+    ./manage.py schemamigration blog --auto
+    rm db.sqlite3
+    ./manage.py syncdb
+    ./manage.py migrate
+    ./manage.py createsuperuser
+
+
+Создадим бэкенд, возвращающий в request нашу модель вместо джанговой *blog/auth.py*. 
+
+.. code-block:: python
+
+
+    from main.models import UserProfile
+    from django.contrib.auth.backends import ModelBackend
+
+    class ProfileUserModelBackend(ModelBackend):
+
+        def get_user(self, user_id):
+            try:
+                return UserProfile.objects.get(pk=user_id)
+            except self.user_class.DoesNotExist:
+                return None
+        @property
+        def user_class(self):
+            return UserProfile
+
+Переопределим в settins.py этот класс (по дефолту он ModelBackend).
+
+.. code-block:: python
+
+    AUTHENTICATION_BACKENDS = (
+        'blog.auth.ProfileUserModelBackend',
+    )
+
+
+Add to settings thumblail precessor.
+
+.. code-block:: python
+
+    from easy_thumbnails.conf import Settings as thumbnail_settings
+    THUMBNAIL_PROCESSORS = (
+        'image_cropping.thumbnail_processors.crop_corners',
+    ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+
+
+
+Добавим в url.py обработку медиа файлов для dev режима сервера.
+
+.. code-block:: python
+
+    from django.conf import settings
+    from django.conf.urls.static import static
+    urlpatterns += [
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+Выставим ссылку на редактирования профайла в шаблон.
+
+.. code-block:: html
+
+     [...]
+    {% if user.is_authenticated %}
+       <a id="logout" href="{% url 'my_profile' %}" class="btn btn-success pull-right">Profile</a>
+       <a id="logout" href="{% url 'logout' %}" class="btn btn-success pull-right">Logout</a>
+    {% else %}
+     [...]
+
+
+Добавим в роутинг url на профайл.
+
+.. code-block:: python
+
+    url(r'^accounts/profile/$', 'main.views.profile', name='my_profile'),
+
+
+Create view function in blog/views.py file.
+
+
+.. code-block:: python
+
+    from django.shortcuts import render
+    from django.template import loader, RequestContext
+    from django.http import HttpResponse, HttpResponseRedirect
+    from django.shortcuts import render_to_response, get_object_or_404
+    from main.forms import ProfileForm
+    from main.models import UserProfile
+    from django.shortcuts import redirect
+    from django.contrib.auth.decorators import login_required
+
+    # Create your views here.
+    def index(request):
+        context = {}
+        return render_to_response('index.html', context, RequestContext(request))
+
+    @login_required
+    def profile(request):
+        profile = UserProfile.objects.get(pk=request.user.pk)
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES, instance=profile)
+            if form.is_valid():
+                form.save()
+            return redirect('my_profile')
+        else:
+            form = ProfileForm(instance=profile)
+        context = {'form': form, 'profile':  profile}
+        return render_to_response('profile.html', context, RequestContext(request))
+
+
+Create template file in main/templates/profile.html
+
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+    {% load widget_tweaks %}
+    {% load i18n %}
+
+           
+    {% block js %}
+        {{ block.super }}
+        {{ form.media }}
+    {% endblock %}
+
+
+
+    {% block bredcrumbs %}
+            <ul class="pull-right breadcrumb">
+                <li class="active">{% trans 'Profile' %}</li>
+
+            </ul>
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="col-md-12">
+
+     {{ p.title }}
+     {{ p.content|safe }}
+
+
+        <div class="well">
+          
+             {{ request.user.thumb }}
+
+     <form method="post" action="" enctype="multipart/form-data">
+                    <h2>{% trans 'My profile' %}</h2>
+                    
+                    {% csrf_token %}
+                   
+
+                    <div class="form-body">
+                        <div class="form-group {%if form.email.errors %}alert alert-danger{%endif%}">
+                            {{ form.email.label_tag }}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon-ok"></i>
+                                </span>
+                               {{ form.email|add_class:"form-control" }}
+                            </div>
+                            <span class="error-block">{{ form.email.help_text }}</span>
+                            <span class="help-block">{{ form.email.errors }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group {%if form.email.errors %}alert alert-danger{%endif%}">
+                            {{ form.first_name.label_tag }}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon-ok"></i>
+                                </span>
+                               {{ form.first_name|add_class:"form-control" }}
+                            </div>
+                            <span class="error-block">{{ form.first_name.help_text }}</span>
+                            <span class="help-block">{{ form.first_name.errors }}</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-body">
+                        <div class="form-group {%if form.email.errors %}alert alert-danger{%endif%}">
+                            {{ form.last_name.label_tag }}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon-ok"></i>
+                                </span>
+                               {{ form.last_name|add_class:"form-control" }}
+                            </div>
+                            <span class="error-block">{{ form.last_name.help_text }}</span>
+                            <span class="help-block">{{ form.last_name.errors }}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-body">
+                        <div class="form-group {%if form.email.errors %}alert alert-danger{%endif%}">
+                            {{ form.image.label_tag }}
+                            
+                                
+                               {{ form.image|add_class:"form-control" }}
+                               {{ form.cropping }}
+                            
+                            <span class="error-block">{{ form.image.help_text }}</span>
+                            <span class="help-block">{{ form.image.errors }}</span>
+                        </div>
+                    </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn theme-btn" id="registration_save">{% trans 'Save' %}</button>
+                            </div>
+                        </div>
+
+                </form>
+
+
+           <div style="clear: both"></div>
+        </div>
+
+    </div>
+
+
+   {% endblock %}
+
+
+.. image:: /images/11/5.png
+    :width: 700px
+    :alt: 8
+
+

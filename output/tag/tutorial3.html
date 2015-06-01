@@ -84,6 +84,26 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/urok-2.html">
 						<i class="icon-folder-open icon-large"></i>Урок 2
 					</a>
@@ -103,6 +123,26 @@
 						<i class="icon-folder-open icon-large"></i>Урок 5
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
+					</a>
+                  </li>
 
                           <ul class="nav pull-right">
                                 <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -119,7 +159,7 @@
       <div class="row">
         <div class="span9" id="content">
         <div class="article">
-                <h1><a href="/tips.html">Tips</a></h1>
+                <h1><a href="/4-1.html">Содержание</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -128,7 +168,7 @@
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
+<a href="/category/urok-4.html"><i class="icon-folder-open"></i>Урок 4</a>.
 
 
 <span class="label">Tags</span>
@@ -137,16 +177,320 @@
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
                 <div class="summary"><ul class="simple">
-<li><a class="reference external" href="/tip-1.html">Запуск сервера разработки.</a></li>
-<li><a class="reference external" href="/postgres.html">Работа с postgresql.</a></li>
-<li><a class="reference external" href="/git.html">Работа с git.</a></li>
-<li><a class="reference external" href="/email.html">email</a></li>
-<li><a class="reference external" href="/protection.html">Code protection</a></li>
-<li><a class="reference external" href="/messages.html">Messages</a></li>
+<li><a class="reference external" href="/4-2.html">Первая модель и работа с базой.</a></li>
+<li><a class="reference external" href="/4-3.html">Редирект, рефакторинг</a></li>
 </ul>
-<p>Email about exceptions.</p>
 
-                        <a class="btn primary xsmall" href="/tips.html">more ...</a>
+                        <a class="btn primary xsmall" href="/4-1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/4-2.html">Первая модель и работа с базой</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-4.html"><i class="icon-folder-open"></i>Урок 4</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Напишем тест для БД.</p>
+<div class="highlight"><pre>    def test_saving_and_retrieving_items(self):
+        first_item = Item()
+        first_item.text = &#39;The first (ever) list item&#39;
+        first_item.save()
+
+        second_item = Item()
+        second_item.text = &#39;Item the second&#39;
+        second_item.save()
+
+        saved_items = Item.objects.all()
+        self.assertEqual(saved_items.count(), 2)
+
+        first_saved_item = saved_items[0]
+        second_saved_item = saved_items[1]
+        self.assertEqual(first_saved_item.text, &#39;The first (ever) list ...</pre></div>
+                        <a class="btn primary xsmall" href="/4-2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/4-3.html">Редирект</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-4.html"><i class="icon-folder-open"></i>Урок 4</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Напишем юнит тест для проверки редиректа после сабмита формы.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">test_home_page_redirects_after_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">HttpRequest</span><span class="p">()</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;POST&#39;</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;item_text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;A new list item&#39;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s">&#39;location&#39;</span><span class="p">],</span> <span class="s">&#39;/&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Результат.</p>
+<div class="highlight"><pre>AssertionError: <span class="m">200</span> !<span class="o">=</span> 302
+</pre></div>
+<p>Допишем вьюху.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">home_page ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/4-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/5-1.html">Содержание</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-5.html"><i class="icon-folder-open"></i>Урок 5</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><ul class="simple">
+<li><a class="reference external" href="/5-2.html">Более удобные методы юнит тестирования.</a></li>
+<li><a class="reference external" href="/5-3.html">Добавление связанной таблицы.</a></li>
+<li><a class="reference external" href="/5-4.html">Наследование шаблонов и добавление bootstrap</a></li>
+</ul>
+
+                        <a class="btn primary xsmall" href="/5-1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/5-2.html">Более удобные методы юнит тестирования.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-5.html"><i class="icon-folder-open"></i>Урок 5</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Вместо</p>
+<div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">&#39;itemey 1&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s">&#39;itemey 2&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+
+<span class="err">пишем</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s">&#39;itemey 1&#39;</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s">&#39;itemey 2&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Вместо</p>
+<div class="highlight"><pre><span class="n">request</span> <span class="o">=</span> <span class="n">HttpRequest</span><span class="p">()</span>
+<span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;POST&#39;</span>
+<span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s">&#39;item_text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;A new list item&#39;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">home_page</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</pre></div>
+<p>Можно воспользоваться более высокоуровневым объектом self.client.</p>
+<div class="highlight"><pre><span class="n">response ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/5-2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/5-3.html">Добавление связанной таблицы</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-5.html"><i class="icon-folder-open"></i>Урок 5</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Добавим новую модель в файл o/blog/models.py.</p>
+<div class="highlight"><pre><span class="c">#coding: utf-8</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Category&#39;</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s">u&#39;Категория&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Создадим таблицу.</p>
+<div class="highlight"><pre>./manage.py schemamigration ...</pre></div>
+                        <a class="btn primary xsmall" href="/5-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/5-4.html">Наследование шаблонов и добавление bootstrap</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-5.html"><i class="icon-folder-open"></i>Урок 5</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/uroki.html"><i class="icon-tag"></i>уроки</a>
+	<a href="/tag/unittest.html"><i class="icon-tag"></i>unittest</a>
+	<a href="/tag/shablony.html"><i class="icon-tag"></i>шаблоны</a>
+	<a href="/tag/form.html"><i class="icon-tag"></i>form</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Качнем архив и распакуем.</p>
+<div class="highlight"><pre>wget https://github.com/twbs/bootstrap/releases/download/v3.3.2/bootstrap-3.3.2-dist.zip -O b.zip
+unzip b.zip
+</pre></div>
+<p>Создадим нужные каталоги и скопируем в проект стилевик.</p>
+<div class="highlight"><pre>mkdir o/blog/static
+mkdir o/blog/static/css
+cp ./bootstrap-3.3.2-dist/css/bootstrap.min.css ...</pre></div>
+                        <a class="btn primary xsmall" href="/5-4.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/6-1.html">Содержание</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-6.html"><i class="icon-folder-open"></i>Урок 6</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><ul class="simple">
+<li><a class="reference external" href="/6-2.html">Авторизация.</a></li>
+<li><a class="reference external" href="/6-3.html">Регистрация.</a></li>
+</ul>
+
+                        <a class="btn primary xsmall" href="/6-1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/7-1.html">Боковое меню и страница категории</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-7.html"><i class="icon-folder-open"></i>Урок 7</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><ul class="simple">
+<li><a class="reference external" href="/7-2.html">Боковое меню и страница категории.</a></li>
+<li><a class="reference external" href="/7-3.html">Админка.</a></li>
+<li><a class="reference external" href="/7-4.html">Виды полей модели.</a></li>
+</ul>
+
+                        <a class="btn primary xsmall" href="/7-1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/8-1.html">Содержание</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-8.html"><i class="icon-folder-open"></i>Урок 8</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><ul class="simple">
+<li><a class="reference external" href="/8-2.html">Страница статьи.</a></li>
+<li><a class="reference external" href="/8-3.html">Коментарии к статье.</a></li>
+<li><a class="reference external" href="/8-4.html">Теги к статье.</a></li>
+<li><a class="reference external" href="/8-5.html">Хлебные крошки.</a></li>
+</ul>
+
+                        <a class="btn primary xsmall" href="/8-1.html">more ...</a>
                 </div>
         </div>
         <hr />
@@ -157,7 +501,10 @@
                         <li class=""><a href="/tag/tutorial.html">1</a></li>
                         <li class=""><a href="/tag/tutorial2.html">2</a></li>
                         <li class="active"><a href="/tag/tutorial3.html">3</a></li>
-                        <li class="next disabled"><a href="#">&rarr; Next</a></li>
+                        <li class=""><a href="/tag/tutorial4.html">4</a></li>
+                        <li class=""><a href="/tag/tutorial5.html">5</a></li>
+                        <li class=""><a href="/tag/tutorial6.html">6</a></li>
+                        <li class="next"><a href="/tag/tutorial4.html">Next &rarr;</a></li>
         </ul>
         </div>
 

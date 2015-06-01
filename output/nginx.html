@@ -84,6 +84,26 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/urok-2.html">
 						<i class="icon-folder-open icon-large"></i>Урок 2
 					</a>
@@ -101,6 +121,26 @@
                   <li >
                     <a href="/category/urok-5.html">
 						<i class="icon-folder-open icon-large"></i>Урок 5
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
 					</a>
                   </li>
 
@@ -179,63 +219,66 @@ sudo ./configure --with-cc-opt<span class="o">=</span><span class="s1">&#39;-g -
 sudo make
 </pre></div>
 <p>Copy binary file to system folder</p>
-<blockquote>
-cp obj/nginx usr/sbin</blockquote>
-<p>sudo nano /etc/nginx/sites-available/default</p>
-<div class="highlight"><pre>   upstream chatserver <span class="o">{</span>
-        server 127.0.0.1:9999<span class="p">;</span>
-    <span class="o">}</span>
+<div class="highlight"><pre> <span class="n">cp</span> <span class="n">obj</span><span class="o">/</span><span class="n">nginx</span> <span class="n">usr</span><span class="o">/</span><span class="n">sbin</span>
 
-server <span class="o">{</span>
+
+ <span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">available</span><span class="o">/</span><span class="n">default</span>
+
+
+<span class="n">upstream</span> <span class="n">chatserver</span> <span class="p">{</span>
+     <span class="n">server</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9999</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span class="n">server</span> <span class="p">{</span>
         <span class="c"># Requires root access.</span>
-        listen       80<span class="p">;</span>
-        server_name socket.course.localhost<span class="p">;</span>
+        <span class="n">listen</span>       <span class="mi">80</span><span class="p">;</span>
+        <span class="n">server_name</span> <span class="n">socket</span><span class="o">.</span><span class="n">course</span><span class="o">.</span><span class="n">localhost</span><span class="p">;</span>
 
         <span class="c"># WebSocket.</span>
-        location /echo/info <span class="o">{</span>
-            proxy_pass http://chatserver<span class="p">;</span>
-            proxy_http_version 1.1<span class="p">;</span>
-            proxy_set_header Upgrade <span class="nv">$http_upgrade</span><span class="p">;</span>
-            proxy_set_header Connection <span class="s2">&quot;upgrade&quot;</span><span class="p">;</span>
-        <span class="o">}</span>
+        <span class="n">location</span> <span class="o">/</span><span class="n">echo</span><span class="o">/</span><span class="n">info</span> <span class="p">{</span>
+            <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">chatserver</span><span class="p">;</span>
+            <span class="n">proxy_http_version</span> <span class="mf">1.1</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">Upgrade</span> <span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">Connection</span> <span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        location / <span class="o">{</span>
-            proxy_pass http://chatserver<span class="p">;</span>
-        <span class="o">}</span>
-
-
-    <span class="o">}</span>
-
-  sudo nano /etc/nginx/nginx.conf
+        <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+            <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">chatserver</span><span class="p">;</span>
+        <span class="p">}</span>
 
 
-rtmp <span class="o">{</span>
+    <span class="p">}</span>
 
-    server <span class="o">{</span>
+  <span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">conf</span>
 
-        listen 1935<span class="p">;</span>
 
-        chunk_size 4000<span class="p">;</span>
+<span class="n">rtmp</span> <span class="p">{</span>
+
+    <span class="n">server</span> <span class="p">{</span>
+
+        <span class="n">listen</span> <span class="mi">1935</span><span class="p">;</span>
+
+        <span class="n">chunk_size</span> <span class="mi">4000</span><span class="p">;</span>
 
         <span class="c"># TV mode: one publisher, many subscribers</span>
-        application mytv <span class="o">{</span>
+        <span class="n">application</span> <span class="n">mytv</span> <span class="p">{</span>
 
             <span class="c"># enable live streaming</span>
-            live on<span class="p">;</span>
+            <span class="n">live</span> <span class="n">on</span><span class="p">;</span>
 
             <span class="c"># record first 1K of stream</span>
-            record all<span class="p">;</span>
-            record_path /tmp<span class="p">;</span>
+            <span class="n">record</span> <span class="nb">all</span><span class="p">;</span>
+            <span class="n">record_path</span> <span class="o">/</span><span class="n">tmp</span><span class="p">;</span>
 
 
             <span class="c"># append current timestamp to each flv</span>
-            record_unique on<span class="p">;</span>
+            <span class="n">record_unique</span> <span class="n">on</span><span class="p">;</span>
 
 
-        <span class="o">}</span>
-    <span class="o">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-<span class="o">}</span>
+<span class="p">}</span>
 </pre></div>
 
                 </div><!-- /.entry-content -->

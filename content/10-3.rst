@@ -1,0 +1,176 @@
+Каталог товаров и связь многие-ко-многим.
+#########################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 10-3
+:category: Урок 10
+:authors: zdimon77@gmail.con
+
+Для древовидного меню будем использовать `mptt <http://django-mptt.github.io/django-mptt/>`_
+
+Добавим пакет в requirements.txt
+
+
+.. code-block:: bash
+
+    django-mptt==0.5.5
+    pytils==0.2.3
+    Pillow==2.5.1
+
+Установим.
+
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+Создадим новое приложение
+
+.. code-block:: bash
+
+    ./manage.py startapp shop
+
+Добавим модуль в INSTALLED_APPS.
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        [...]
+        'shop',
+        'mptt',
+
+
+Создадим модель shop/models.py.
+
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    from django.db import models
+    from mptt.models import TreeForeignKey, MPTTModel
+    import pytils
+    from django.core.urlresolvers import reverse
+    from django.contrib.auth.models import User
+    from django.utils.safestring import mark_safe
+
+
+    class Catalog(MPTTModel):
+        name = models.CharField(verbose_name='Name',max_length=250, blank=True)
+        name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+        parent = TreeForeignKey('self', null=True, blank=True,
+                                related_name='sub_category')
+        def __unicode__(self):
+            return self.name
+
+        def save(self, **kwargs):
+            if not self.id:
+                self.name_slug = pytils.translit.slugify(self.name)
+            return super(Catalog, self).save(**kwargs)
+
+        def get_absolute_url(self):
+           return reverse("catalog", kwargs={"slug": self.name_slug})
+
+
+    class Journal(models.Model):
+        JOURNAL_TYPE_CHOICES = (
+            ('magazine', 'Journal'),
+            ('paper', 'Paper'),
+            ('book', 'Book'),
+        )
+        name = models.CharField(verbose_name='Name',max_length=250, blank=True)
+        name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+        description = models.TextField(verbose_name='Description',max_length=250, blank=True)
+        journal_type = models.CharField(verbose_name=u'type of journal (magazine, paper or book)',
+                                        choices=JOURNAL_TYPE_CHOICES,
+                                        default='magazine',
+                                        max_length=10)
+        price = models.DecimalField( verbose_name='Price RUB', max_digits= 12, decimal_places= 2)
+        cover = models.ImageField(upload_to='journal_cover', verbose_name='Journal cover', blank=True)
+        category = models.ManyToManyField(Catalog,
+                                          blank=True,
+                                          verbose_name='Catalogs')
+        seo_content = models.TextField(verbose_name='МЕТА content', blank=True)
+        seo_title =   models.TextField(verbose_name='МЕТА title', blank=True)
+        seo_keywords = models.TextField(verbose_name='МЕТА keywords', blank=True)
+       
+
+        def save(self, **kwargs):
+            if not self.id:
+                self.name_slug = pytils.translit.slugify(self.name)
+            return super(Journal, self).save(**kwargs)
+
+        @property
+        def get_cover(self):
+            try:
+                return mark_safe('<img src="%s" />' % self.cover.url)
+            except:
+                return mark_safe('<img src="%s" />' % '/media/journal_cover/plug.jpg')
+
+        def get_absolute_url(self):
+           return reverse("journal", kwargs={"slug": self.name_slug})
+
+
+        def __unicode__(self):
+            return self.name
+            
+Добавим модели в админку *shop/admin.py*.
+
+.. code-block:: python
+
+    from django.contrib import admin
+    from shop.models import Catalog, Journal
+    from mptt.admin import MPTTModelAdmin
+
+
+    class CatalogAdmin(MPTTModelAdmin):
+        list_display = ( 'name',)
+
+
+    admin.site.register(Catalog, CatalogAdmin)
+
+
+    class JournalAdmin(admin.ModelAdmin):
+        list_display = ( 'name', 'price' )
+        list_filter = ('journal_type', )
+        list_editable = [ 'price']
+        list_display_links = ['name']
+
+    admin.site.register(Journal, JournalAdmin)
+
+
+Добавим обслуживание медиа файлов для DEBUG режима в urls.py
+
+.. code-block:: python
+
+    from django.conf import settings
+    if settings.DEBUG:
+        urlpatterns += patterns('',
+         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT,}),
+
+         )
+
+
+Создадим каталог media в корне проекта.
+
+.. code-block:: bash
+    
+    cd ~/o_ve/o
+    mkdir media
+
+Добавим пути к медиа в settings.py.
+
+.. code-block:: python
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+.. image:: /images/10/3.png
+    :width: 700px
+    :alt: admin
+
+
+.. image:: /images/10/4.png
+    :width: 700px
+    :alt: admin
+

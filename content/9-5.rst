@@ -1,0 +1,103 @@
+Celery.
+#######
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 9-5
+:category: Урок 9
+:authors: zdimon77@gmail.con
+
+Добавим необходимые пакеты в requirements.txt.
+
+.. code-block:: python
+
+    celery==3.1.11
+    django-celery==3.1.10
+    redis==2.10.1
+
+Install it via pip.
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+Install redis.
+
+.. code-block:: bash
+
+    sudo apt-get install redis-server
+
+Configure celery to use redis as backend *settings.py*.
+
+
+.. code-block:: python
+
+    import djcelery
+    djcelery.setup_loader()
+    BROKER_URL = 'redis://localhost:6379/0'
+
+Add **'djcelery',** in INSTALLED_APPS.
+
+Проверим работу сервера.
+
+    ./manage.py celeryd
+
+
+Create task.
+
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    from celery import task
+    from celery.utils.log import get_task_logger
+    from registration.models import RegistrationProfile
+
+
+    logger = get_task_logger(__name__)
+    logger.setLevel('DEBUG')
+
+    @task(name='delete_fake_users')
+    def delete_fake_users():
+        logger.info('Deleting outsiders...')
+        RegistrationProfile.objects.delete_expired_users()
+
+Add periodical task in settings.py.
+
+.. code-block:: python
+
+    from celery.schedules import crontab
+    CELERYBEAT_SCHEDULE = {
+        
+             'delete_fake_user': {'task': 'delete_fake_users','schedule': crontab()},
+
+    }
+
+.. code-block:: bash
+
+    crontab() - Execute every minute.
+    crontab(minute=0, hour=0) - Execute daily at midnight.
+    crontab(minute=0, hour='*/3') - Execute every three hours: midnight, 3am, 6am, 9am, noon, 3pm, 6pm, 9pm.
+
+
+Create tables in the database.
+
+.. code-block:: bash
+
+    ./manage.py migrate
+
+
+Run celery.
+
+.. code-block:: bash
+
+    ./manage.py celeryd
+
+
+Run celery beat in the separate terminal (simultaneously).
+
+.. code-block:: bash
+
+    ./manage.py celerybeat
+
+
+

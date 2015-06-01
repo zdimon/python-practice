@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Python tutorial - Урок 10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="zdimon77@gmail.com">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="Python tutorial ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">Python tutorial </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li >
+                    <a href="/category/oshibki.html">
+						<i class="icon-folder-open icon-large"></i>Ошибки
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/raznoe.html">
+						<i class="icon-folder-open icon-large"></i>Разное
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tips.html">
+						<i class="icon-folder-open icon-large"></i>tips
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-1.html">
+						<i class="icon-folder-open icon-large"></i>Урок 1
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-2.html">
+						<i class="icon-folder-open icon-large"></i>Урок 2
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-3.html">
+						<i class="icon-folder-open icon-large"></i>Урок 3
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-4.html">
+						<i class="icon-folder-open icon-large"></i>Урок 4
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-5.html">
+						<i class="icon-folder-open icon-large"></i>Урок 5
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/10-1.html">Содержание</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><ul class="simple">
+<li><a class="reference external" href="/10-2.html">Меняем внешний вид админки.</a></li>
+<li><a class="reference external" href="/10-3.html">Каталог товаров и связь многие-ко-многим.</a></li>
+<li><a class="reference external" href="/10-4.html">Вывод дерева каталогов на фронтенде.</a></li>
+<li><a class="reference external" href="/10-5.html">Работаем с изображениями.</a></li>
+</ul>
+
+                        <a class="btn primary xsmall" href="/10-1.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-2.html">Меняем внешний вид админки</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Будем использовать <a class="reference external" href="https://django-grappelli.readthedocs.org/en/latest/">grapelli</a></p>
+<p>Добавим пакет в requirements.txt</p>
+<div class="highlight"><pre>django-grappelli<span class="o">==</span>2.5.3
+</pre></div>
+<p>Установим.</p>
+<div class="highlight"><pre>pip install -r requirements.txt
+</pre></div>
+<p>Добавим пакет в INSTALLED_APPS  перед 'django.contrib.admin'.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;grappelli&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Добавим роутинг перед url(r'^admin/', include(admin.site.urls)).</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^grappelli/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;grappelli.urls&#39;</span><span class="p">)),</span>
+<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-2.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-3.html">Каталог товаров и связь многие-ко-многим.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Для древовидного меню будем использовать <a class="reference external" href="http://django-mptt.github.io/django-mptt/">mptt</a></p>
+<p>Добавим пакет в requirements.txt</p>
+<div class="highlight"><pre>django-mptt<span class="o">==</span>0.5.5
+<span class="nv">pytils</span><span class="o">==</span>0.2.3
+<span class="nv">Pillow</span><span class="o">==</span>2.5.1
+</pre></div>
+<p>Установим.</p>
+<div class="highlight"><pre>pip install -r requirements.txt
+</pre></div>
+<p>Создадим новое приложение</p>
+<div class="highlight"><pre>./manage.py startapp shop
+</pre></div>
+<p>Добавим модуль в INSTALLED_APPS.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="s">&#39;shop&#39;</span><span class="p">,</span>
+    <span class="s">&#39;mptt&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Создадим модель shop/models.py.</p>
+<div class="highlight"><pre><span class="c"># -*- coding: utf-8 ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-3.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-4.html">Вывод дерева каталогов на фронтенде.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Создадим шаблонный тег который будет выводить дерево каталогов.</p>
+<p>Создадим новый каталог и в нем файл shop/templatetags/catalog.py</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">shop.models</span> <span class="kn">import</span> <span class="n">Catalog</span>
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="nd">@register.inclusion_tag</span><span class="p">(</span><span class="s">&quot;catalog.html&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">catalog</span><span class="p">():</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="n">Catalog</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">[</span><span class="s">&#39;nodes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">categories</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+<p>Создадим файл __init__ ...</p>
+                        <a class="btn primary xsmall" href="/10-4.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/10-5.html">Работаем с изображениями.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/urok-10.html"><i class="icon-folder-open"></i>Урок 10</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Добавим необходимые пакеты для работы с изображениями в requirements.txt.</p>
+<div class="highlight"><pre>sorl-thumbnail<span class="o">==</span>11.12
+django-image-cropping<span class="o">==</span>1.0.0
+easy-thumbnails<span class="o">==</span>2.1
+django-resized<span class="o">==</span>0.3.4
+</pre></div>
+<p>Добавим приложения в INSTALL_APPS.</p>
+<div class="highlight"><pre><span class="s">&#39;sorl.thumbnail&#39;</span><span class="p">,</span>
+<span class="s">&#39;easy_thumbnails&#39;</span><span class="p">,</span>
+<span class="s">&#39;image_cropping&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Добавим новую модель с изображениями, привязанными к журналам.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Image</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">journal</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Journal&#39;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/10-5.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+
+                <section id="content" class="body">
+                <h1>Pages</h1>
+                        <li><a href="/pages/python, курсы.html">Курс обучения языку python</a></li>
+                </section>
+        </div><!--/span-->
+
+               
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

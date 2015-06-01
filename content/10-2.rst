@@ -1,0 +1,57 @@
+Меняем внешний вид админки
+##########################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 10-2
+:category: Урок 10
+:authors: zdimon77@gmail.con
+
+Будем использовать `grapelli <https://django-grappelli.readthedocs.org/en/latest/>`_
+
+Добавим пакет в requirements.txt
+
+
+.. code-block:: bash
+
+    django-grappelli==2.5.3   
+
+Установим.
+
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+Добавим пакет в INSTALLED_APPS  перед 'django.contrib.admin'.
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        'grappelli',
+        'django.contrib.admin',
+
+Добавим роутинг перед url(r'^admin/', include(admin.site.urls)).
+
+.. code-block:: python
+
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+
+Run server and enjoy!
+
+
+.. code-block:: bash
+
+    ./manage.py runserver 8008
+
+
+.. image:: /images/10/1.png
+    :width: 700px
+    :alt: 8
+
+
+.. image:: /images/10/2.png
+    :width: 700px
+    :alt: admin
+

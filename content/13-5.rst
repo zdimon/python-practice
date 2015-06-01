@@ -1,0 +1,48 @@
+Фильтры
+#######
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 13-5
+:category: Урок 13
+:authors: zdimon77@gmail.con
+
+Иногда нужно что-то выводить в шаблоне, если открыта определённая страница. Например, подсветить кнопку «магазин» в меню, если пользователь сейчас в разделе магазина. Предлагаю следующий вариант:
+
+.. code-block:: python
+
+    from django import template
+    from django.core.urlresolvers import resolve
+    from project.utils import parse_args
+
+    register = template.Library()
+    @register.filter
+    def is_current_page(request, param):
+        return resolve(request.path).view_name == param
+
+Это фильтр, а не тэг, и причина тут одна: можно строить совершенно дичайшие конструкции с {% if %}. Например, если текущая страница — карточка товара, и при этом пользователь авторизован:
+
+.. code-block:: python
+
+    {% if request|is_current_page:'shop/product' and user.is_authenticated %}
+
+Есть и альтернативная, более точная, реализация, в которой используются аргументы (args или kwargs) для определения точной страницы (т.е. не просто «страница какого-либо товара», а «страница товара с id=36»):
+
+
+.. code-block:: python
+
+    {% if request|is_current_page:'shop/product,id=36' %}
+
+    @register.filter
+    def is_current_page(request, param):
+        params = param.split(',')
+        name = params[0]
+        args, kwargs = parse_args(params[1:])
+        # Do not mix args and kwargs in reverse() - it is forbidden!
+        if args:
+            return request.path == reverse(name, args=args)
+        elif kwargs:
+            return request.path == reverse(name, kwargs=kwargs)
+        else:
+            return request.path == reverse(name)
+

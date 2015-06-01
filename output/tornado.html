@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Запуск торнадо сервера в режиме вебсокета.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="zdimon77@gmail.com">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="Python tutorial ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">Python tutorial </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                  <li >
+                    <a href="/category/oshibki.html">
+						<i class="icon-folder-open icon-large"></i>Ошибки
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/raznoe.html">
+						<i class="icon-folder-open icon-large"></i>Разное
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/tips.html">
+						<i class="icon-folder-open icon-large"></i>tips
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-1.html">
+						<i class="icon-folder-open icon-large"></i>Урок 1
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-2.html">
+						<i class="icon-folder-open icon-large"></i>Урок 2
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-3.html">
+						<i class="icon-folder-open icon-large"></i>Урок 3
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-4.html">
+						<i class="icon-folder-open icon-large"></i>Урок 4
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-5.html">
+						<i class="icon-folder-open icon-large"></i>Урок 5
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to Запуск торнадо сервера в режиме вебсокета.">
+                                        Запуск торнадо сервера в режиме вебсокета.
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info -->                </div>
+                <p>Django with tornado as wsgi server.</p>
+<p>tserver.py</p>
+<div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tornado.httpserver</span>
+<span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+<span class="kn">import</span> <span class="nn">tornado.wsgi</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">django.core.handlers.wsgi</span>
+<span class="kn">from</span> <span class="nn">config.settings</span> <span class="kn">import</span> <span class="n">BASE_DIR</span>
+<span class="kn">from</span> <span class="nn">tornado</span> <span class="kn">import</span> <span class="n">web</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;config.settings&#39;</span>
+        <span class="n">application</span> <span class="o">=</span> <span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">wsgi</span><span class="o">.</span><span class="n">WSGIHandler</span><span class="p">()</span>
+        <span class="n">container</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">wsgi</span><span class="o">.</span><span class="n">WSGIContainer</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+        <span class="n">http_server</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">httpserver</span><span class="o">.</span><span class="n">HTTPServer</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+        <span class="n">http_server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">)</span>
+        <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+                <span class="n">main</span><span class="p">()</span>
+</pre></div>
+<p>Requirements.</p>
+<div class="highlight"><pre><span class="nv">tornado</span><span class="o">==</span>4.0.1
+sockjs-tornado<span class="o">==</span>1.0.1
+-e git+https://github.com/peterbe/django-sockjs-tornado#egg<span class="o">=</span>django-sockjs-tornado
+-e git+https://github.com/kmerenkov/brukva.git#egg<span class="o">=</span>brukva
+</pre></div>
+<p>Create base tornado class in filr myapp/tornadoserver.py.</p>
+<div class="highlight"><pre>    <span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple sockjs-tornado chat application. By default will listen on port 5555.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+<span class="kn">import</span> <span class="nn">tornado.web</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sockjs.tornado</span>
+<span class="kn">import</span> <span class="nn">brukva</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">brukva</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s">&#39;DEBUG&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">class</span> <span class="nc">ChatConnection</span><span class="p">(</span><span class="n">sockjs</span><span class="o">.</span><span class="n">tornado</span><span class="o">.</span><span class="n">SockJSConnection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Chat connection implementation&quot;&quot;&quot;</span>
+    <span class="n">participants</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c"># List of users online</span>
+
+    <span class="c"># Initialization</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ChatConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">brukva</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+
+    <span class="c"># When connection need to be open</span>
+    <span class="k">def</span> <span class="nf">on_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; function when someone made connection from javascript&#39;&#39;&#39;</span>
+        <span class="c"># Send that someone joined</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;act&quot;</span> <span class="p">:</span> <span class="s">&quot;someone_joined&quot;</span><span class="p">,</span> <span class="s">&quot;content&quot;</span> <span class="p">:</span> <span class="s">&quot;Someone joined&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">participants</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+        <span class="c"># Add client to the clients list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c"># When we recieve message from redis server we go here</span>
+    <span class="k">def</span> <span class="nf">redis_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; recieving  message from redis server,</span>
+<span class="sd">            convertin it in json format</span>
+<span class="sd">            and sending it to the current chanel</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+
+    <span class="c"># Subscribe user to channel</span>
+    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">room</span><span class="p">)</span> <span class="c"># Redis subscribe</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;subscribing to room </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">room</span><span class="p">,</span> <span class="p">))</span> <span class="c"># Debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redis_message</span><span class="p">)</span>
+
+    <span class="c"># When we receive messages we go here</span>
+    <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; handler of message &#39;&#39;&#39;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="c"># Debug</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="c"># When we open connection</span>
+        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s">&#39;act&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;open_connect&#39;</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Connection esteblished.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s">&#39;act&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;ping&#39;</span><span class="p">:</span>
+            <span class="n">mes</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;act&#39;</span><span class="p">:</span> <span class="s">&#39;pong&#39;</span><span class="p">,</span> <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">]</span> <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">participants</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mes</span><span class="p">))</span>
+    <span class="c"># When current user tries to disconnect</span>
+    <span class="k">def</span> <span class="nf">on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;User left&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Add django_sockjs_tornado to INSTALL_APPS.</p>
+<div class="highlight"><pre><span class="s">&#39;django_sockjs_tornado&#39;</span><span class="p">,</span>
+</pre></div>
+<p>Define  SOCKJS_CLASSES</p>
+<div class="highlight"><pre><span class="n">SOCKJS_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;myapp.tornadoapp.ChatConnection&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<p>Get sockjs client script.</p>
+<div class="highlight"><pre><span class="nb">cd </span>project/myapp/style
+git clone https://github.com/sockjs/sockjs-client.git
+<span class="nb">cd</span>
+</pre></div>
+<p>Create templates and views.</p>
+<p>from co.settings import SOCKJS_SERVER</p>
+<dl class="docutils">
+<dt>def index(request,id):</dt>
+<dd>return render_to_response('index.html', context, RequestContext(request))</dd>
+<dt>def js_for_owner(request):</dt>
+<dd>context = {'server': SOCKJS_SERVER}
+return render_to_response('client.js', context, RequestContext(request))</dd>
+</dl>
+<p>Define SOCKJS_SERVER variable in settings.py.</p>
+<div class="highlight"><pre><span class="n">SOCKJS_SERVER</span> <span class="o">=</span> <span class="s">&#39;localhost:9999&#39;</span>
+</pre></div>
+<p>index.html</p>
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;{% static &#39;sockjs-client/dist/sockjs-0.3.4.min.js&#39; %}&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;{% url &#39;course_student_js&#39; %}&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+[...]
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">data-message=</span><span class="s">&#39;ping&#39;</span> <span class="na">id=</span><span class="s">&quot;test_message&quot;</span><span class="nt">&gt;</span> Test <span class="nt">&lt;/a&gt;</span>
+</pre></div>
+<p>client.js</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">transports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;websocket&#39;</span><span class="p">,</span> <span class="s1">&#39;xhr-streaming&#39;</span> <span class="p">,</span><span class="s1">&#39;iframe-eventsource&#39;</span><span class="p">,</span> <span class="s1">&#39;iframe-htmlfile&#39;</span> <span class="p">,</span> <span class="s1">&#39;xhr-polling&#39;</span><span class="p">,</span> <span class="s1">&#39;iframe-xhr-polling&#39;</span><span class="p">,</span> <span class="s1">&#39;jsonp-polling&#39;</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SockJS</span><span class="p">(</span><span class="s1">&#39;http://{{ server }}/echo&#39;</span><span class="p">,</span> <span class="nx">transports</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">current_user_id</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s1">&#39;{{ user_id }}&#39;</span><span class="p">);</span>
+
+
+<span class="nx">conn</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">act</span> <span class="o">==</span> <span class="s1">&#39;pong&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="p">}</span>
+<span class="nx">conn</span><span class="p">.</span><span class="nx">onclose</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Disconnected.&#39;</span><span class="p">);</span>
+    <span class="nx">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">conn</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connected.&#39;</span><span class="p">);</span>
+    <span class="nx">mess</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;act&quot;</span> <span class="o">:</span> <span class="s2">&quot;open_connect&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ user_id }}&quot;</span><span class="p">,</span> <span class="s2">&quot;auth&quot;</span> <span class="o">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;room_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ room_id }}&quot;</span><span class="p">,</span> <span class="s2">&quot;place&quot;</span> <span class="o">:</span> <span class="s2">&quot;chat&quot;</span> <span class="p">};</span>
+    <span class="nx">conn</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">mess</span><span class="p">));</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//////////////////////////////////////</span>
+<span class="c1">//////////Initialization/////////////</span>
+<span class="c1">/////////////////////////////////////</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+
+             <span class="c1">//// Test message</span>
+             <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#test_message&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+                <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-message&#39;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">mess</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;act&quot;</span> <span class="o">:</span> <span class="s2">&quot;ping&quot;</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span> <span class="o">:</span> <span class="nx">message</span> <span class="p">};</span>
+                <span class="nx">conn</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">mess</span><span class="p">));</span>
+            <span class="p">});</span>
+            <span class="c1">///////////////////////////////////</span>
+
+
+     <span class="p">});</span>
+</pre></div>
+<p>Run socket server.</p>
+<div class="highlight"><pre>./manage.py socketserver
+</pre></div>
+
+                </div><!-- /.entry-content -->
+        </article>
+</section>
+        </div><!--/span-->
+
+               
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>

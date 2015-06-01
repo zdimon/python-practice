@@ -1,0 +1,34 @@
+Выведем галерею изображений на фронтенде.
+#########################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 11-2
+:category: Урок 11
+:authors: zdimon77@gmail.con
+
+
+
+Исправим шаблон o/shop/templates/shop/journal_detail.html
+
+
+.. code-block:: python
+
+    {% block content %}
+        <h1>{{ object.name }}</h1>
+        <div class="well" > {{object.thumbnail}} {{ object.description }}</div>
+        {% for i in object.image_set.all %}
+           {{ i.thumb }}
+        {% endfor %}
+
+    {% endblock %}
+
+
+
+
+.. image:: /images/11/1.png
+    :width: 700px
+    :alt: 8
+
+
+

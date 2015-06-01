@@ -1,0 +1,90 @@
+Отрабатываем 404 и логируем ошибки.
+###################################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 11-4
+:category: Урок 11
+:authors: zdimon77@gmail.con
+
+
+
+Будем вставлять `этот <https://pypi.python.org/pypi/django-ckeditor-updated>`_ редактор.
+
+
+Добавим настройку логирования в settings.py.
+
+
+
+.. code-block:: python
+
+        LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'formatters': {
+            'verbose': {
+                'format': '%(levelname)s %(asctime)s %(name)s.%(funcName)s ::: %(message)s'
+            },
+            'simple': {
+                'format': '%(levelname)s %(message)s'
+            },
+        },
+       
+        'handlers': {
+            'null': {
+                'level':'DEBUG',
+                'class':'django.utils.log.NullHandler',
+            },
+             'file': {
+                 'level': 'ERROR',
+                 'class': 'logging.handlers.RotatingFileHandler',
+                 'filename': 'error.log',
+                 'formatter': 'verbose',
+                 'maxBytes': 1024 * 1024 * 10,  # 10 mb
+             },
+            'mail_admins': {
+                'level': 'ERROR',
+                'class': 'django.utils.log.AdminEmailHandler',
+            }
+        },
+        'loggers': {
+            'django': {
+                'handlers':['null'],
+                'propagate': True,
+                'level':'INFO',
+            },
+            'django.request': {
+                'handlers': ['mail_admins'],
+                'level': 'ERROR',
+                'propagate': False,
+            },
+            'shop.views': {
+                'handlers': ['file', 'mail_admins'],
+                'level': 'ERROR',
+            }
+        }
+    }
+
+
+Отработаем 404 ошибку и пошлем сигнал в лог (shop/views.py).
+
+
+.. code-block:: python
+
+    class JournalDetailView(DetailView):
+        model = Journal
+
+        def get_object(self):
+            try:
+                object = Journal.objects.get(name_slug=self.kwargs['slug'])
+            except:
+                logger.error('404 has risen!')
+                raise Http404
+
+Теперь все ошибки 404 будут фиксироваться в файле o/error.log.
+
+
+
+
+
+

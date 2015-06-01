@@ -1,0 +1,169 @@
+Работаем с изображениями.
+#########################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 10-5
+:category: Урок 10
+:authors: zdimon77@gmail.con
+
+Добавим необходимые пакеты для работы с изображениями в requirements.txt.
+
+.. code-block:: bash
+
+    sorl-thumbnail==11.12
+    django-image-cropping==1.0.0
+    easy-thumbnails==2.1
+    django-resized==0.3.4
+
+Добавим приложения в INSTALL_APPS.
+
+.. code-block:: python
+
+    'sorl.thumbnail',
+    'easy_thumbnails',
+    'image_cropping',
+
+
+Добавим новую модель с изображениями, привязанными к журналам.
+
+.. code-block:: python
+
+    class Image(models.Model):
+        journal = models.ForeignKey('Journal')
+        title = models.CharField(max_length=250, verbose_name='Title', blank=True)
+        image  = ResizedImageField(max_width=800, max_height=600, upload_to='news', verbose_name='Image')
+        cropping = ImageRatioField('image', '300x300')
+        def delete(self, *args, **kwargs):
+            super(Image, self).delete(*args, **kwargs)
+            try:
+                storage, path = self.image.storage, self.image.path
+                storage.delete(path)
+            except:
+                pass
+        def thumb(self):
+            thumbnail_url = get_thumbnailer(self.image).get_thumbnail({
+                'size': (150, 150),
+                'box': self.cropping,
+                'crop': True,
+            }).url
+            return mark_safe(u'<img src="%s" />' % thumbnail_url)
+        def __unicode__(self):
+            return self.title
+        class Meta:
+            verbose_name_plural = u'Images'
+
+
+
+    
+
+
+Добавим модель с изображениями в админку shop/admin.py.
+
+
+.. code-block:: python
+
+    from image_cropping import ImageRatioField
+    from django_resized import ResizedImageField
+    from sorl.thumbnail import get_thumbnail
+
+    [.....]
+
+    class Image(models.Model):
+        journal = models.ForeignKey('Journal')
+        title = models.CharField(max_length=250, verbose_name='Title', blank=True)
+        image  = models.ImageField(upload_to='journal_images', verbose_name='Image', blank=True)
+        cropping = ImageRatioField('image', '300x300')
+        def delete(self, *args, **kwargs):
+            super(Image, self).delete(*args, **kwargs)
+            try:
+                storage, path = self.image.storage, self.image.path
+                storage.delete(path)
+            except:
+                pass
+        def thumb(self):
+            thumbnail_url = get_thumbnailer(self.image).get_thumbnail({
+                'size': (150, 150),
+                'box': self.cropping,
+                'crop': True,
+            }).url
+            return mark_safe(u'<img src="%s" />' % thumbnail_url)
+        def __unicode__(self):
+            return self.title
+        class Meta:
+            verbose_name_plural = u'Images'
+
+
+Добавим метод в модель Journal, который сделает превьюшку картинки.
+
+
+.. code-block:: python
+
+    @property
+    def thumbnail(self):
+        if (self.cover):
+            image = get_thumbnail(self.cover.path, '60x60', crop='center', format='PNG')
+            return mark_safe(u'<img src="%s" />' % image.url)
+        return 'no image'
+
+
+
+Создадим таблицы для нашей модели и добавленных приложений.
+
+
+
+.. code-block:: bash
+
+    ./manage.py syncdb
+    ./manage.py migrate
+
+
+Добавим вывод превьюшки в таблицу изданий.
+
+
+.. code-block:: python
+
+    class JournalAdmin(admin.ModelAdmin):
+        list_display = ( 'name', 'thumbnail', 'price' )
+
+
+Добавим новую модель (Image) в админку и включим (inlines) ее в форму редактирования статьи.
+
+.. code-block:: python
+
+    class ImageInline(ImageCroppingMixin,admin.TabularInline):
+        model = Image
+        verbose_name_plural = 'Images'
+
+
+    class JournalAdmin(admin.ModelAdmin):
+        list_display = ( 'name', 'thumbnail', 'price' )
+        list_filter = ('journal_type', )
+        list_editable = [ 'price']
+        list_display_links = ['name']
+        inlines = [
+            ImageInline,
+        ]
+    admin.site.register(Journal, JournalAdmin)
+
+
+
+
+
+
+.. image:: /images/10/6.png
+    :width: 700px
+    :alt: 8
+
+
+.. image:: /images/10/7.png
+    :width: 700px
+    :alt: 8
+
+
+
+
+
+
+
+

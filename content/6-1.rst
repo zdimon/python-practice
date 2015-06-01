@@ -1,0 +1,15 @@
+Содержание
+##########
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 6-1
+:category: Урок 6
+:authors: zdimon77@gmail.con
+
+
+
+- `Авторизация. </6-2.html>`_
+- `Регистрация. </6-3.html>`_
+
+

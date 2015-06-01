@@ -1,0 +1,317 @@
+Авторизация
+###########
+
+:date: 2015-02-10
+:tags: python, модули, авторизация
+:slug: 6-2
+:category: Урок 6
+:authors: zdimon77@gmail.con
+
+Перенесем в репозиторий файл requirements.txt и допишем в него новый пакет django registration, который будем использовать в процессе регистрации и авторизации.
+
+.. code-block:: bash
+
+    mv requirements.txt o/requirements.txt
+
+Содержимое requirements.txt
+
+.. code-block:: Python
+
+    Django==1.6
+    south==1.0
+    selenium==2.44
+    pyrg==0.2.6
+    django-registration==1.0
+
+
+Установим новый пакет.
+
+    pip install -r requirements.txt
+
+Пропишем его в settings.py
+
+.. code-block:: Python
+
+    INSTALLED_APPS = (
+        [...]
+        'blog',
+        'registration',
+
+
+
+Немного изменим структуру файлов функциональных тестов чтоб иметь возможность их создавать в нескольких файлах.
+Создадим базовый клас тестов от которого будем наследовать все остальные *o/functional_test/base.py*.
+
+.. code-block:: Python
+
+    #!../bin/python
+    # -*- coding: utf-8 -*-
+    from django.test import LiveServerTestCase
+    from selenium import webdriver
+
+    class BaseTest(LiveServerTestCase):
+
+        def setUp(self):
+            self.browser = webdriver.Firefox()
+            self.browser.implicitly_wait(3)
+
+        def tearDown(self):
+            self.browser.quit
+
+Теперь унаследуемся в остальных и уберем лишнее (то что уже описано в Base).
+
+**o/functional_test/test.py**
+
+.. code-block:: Python
+
+
+    #!../bin/python
+    # -*- coding: utf-8 -*-
+    from .base import BaseTest
+    import unittest
+    from selenium.webdriver.common.keys import Keys
+
+    class NewVisitorTest(BaseTest):
+
+
+        def test_is_title_ok(self):
+            self.browser.get(self.live_server_url)
+            self.assertIn('Hello', self.browser.title)
+
+            # найдем тег H1 с содержимым
+            header_text = self.browser.find_element_by_tag_name('h1').text
+            self.assertIn('Hello world', header_text)
+            
+            # найдем inputbox с атрибутом
+            inputbox = self.browser.find_element_by_id('id_new_item')
+            self.assertEqual(
+                    inputbox.get_attribute('placeholder'),
+                    'Enter a to-do item'
+            )
+
+            # заполним inputbox 
+            inputbox.send_keys('Buy peacock feathers')
+
+            # Сабмитнем форму и подождем
+
+            inputbox.send_keys(Keys.ENTER)
+            import time
+            #time.sleep(10)
+
+            # поищем на странице таблицу с заданным текстом
+            table = self.browser.find_element_by_id('id_list_table')
+            rows = table.find_elements_by_tag_name('tr')
+            self.assertIn('Buy peacock feathers', [row.text for row in rows])
+
+
+            self.fail('Finish the test!')
+
+
+
+
+Пишем тест, ожидающий код формы на странице. Создадим новый файл *o/functional_test/test_login.py*.
+
+.. code-block:: Python
+
+    #!../bin/python
+    # -*- coding: utf-8 -*-
+    from .base import BaseTest
+
+
+    class LoginTest(BaseTest):
+
+        def test_login_form_html(self):
+            # Edith goes to the home page
+            self.browser.get(self.live_server_url)
+            # find login inbox
+            username = self.browser.find_element_by_name('username')
+            password = self.browser.find_element_by_name('password')
+
+        
+Запускаем последний тест.
+
+.. code-block:: bash
+
+    pyrg ./manage.py test functional_test.test_login
+
+Получаем.
+
+.. code-block:: bash
+
+    NoSuchElementException: Message: Unable to locate element: {"method":"name","selector":"username"}
+    [...]
+    FAILED (errors=1)
+
+
+Добавим html формы в главный шаблон o/templates/base.html.
+
+.. code-block:: html
+
+    {% block header %}{% endblock %}
+
+     <form class="navbar-form navbar-right" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+            <div class="form-group">
+              <input name="username" type="text" placeholder="login" style="width: 100px; height: 30px; border: 2px solid silver" >
+            </div>
+            <div class="form-group">
+              <input name="password" type="password" placeholder="password" style="width: 100px; height: 30px; border: 2px solid silver">
+            </div>
+            <div class="form-group">
+              <button type="submit" name="enter" class="btn btn-success">Sign in</button>
+            </div>
+      </form>
+
+Добавим роутинг (o/urls.py) для логина и разлогина к джанговым вьюхам.
+
+.. code-block:: Python
+
+     url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}, name='logout'),
+     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+
+
+Тест прошел пишем новый на сабмит формы с ошибочной информацией о логине и пароле.
+
+.. code-block:: Python
+
+    def test_login_form_submit(self):
+        from django.contrib.auth.models import User
+        [...]
+        self.browser.find_element_by_name('enter').click()
+        time.sleep(2)
+        unlink = self.browser.find_element_by_id('logout').click()
+        time.sleep(2)
+        username = self.browser.find_element_by_name('username').send_keys('blabla')
+        password = self.browser.find_element_by_name('password').send_keys('blabla')
+        header_text = self.browser.find_element_by_tag_name('h4').text
+        self.assertIn('Login error!', header_text)  
+
+Тест не проходит.
+
+
+Добавим каталог (o/templates) и шаблон, на который переходит сайт (пакет django-registration) в случае неподходящего логина и пароля.
+
+.. code-block:: bash
+
+    cd templates
+    mkdir registration
+    touch login.htm
+
+.. code-block:: html
+
+
+    {% extends "base.html" %}
+    {% block content %}
+
+
+    <div class="regAccount">
+       
+        <!-- Login form -->
+        {% if form.errors %}
+            <h4 style="color: red">Login error!</h4>
+        {% endif %}
+        <ul class='errorlist'>
+            {% for error in form.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="col-md-4 login-signup-page">
+        <form method="post" action="{% url 'django.contrib.auth.views.login' %}" class="form_class">
+                {% csrf_token %}
+                <h2> Login </h2>
+
+                        <div class="input-group margin-bottom-20">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input name="username" type="text" class="form-control" placeholder="login">
+                        </div>
+                        </br>
+                        <div class="input-group margin-bottom-20">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" name="password"  class="form-control" placeholder="password">
+
+
+                        </div>
+                         </br>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <button type="submit" class="btn btn-success pull-right">Login</button>
+                            </div>
+                        </div>
+        </form>
+           
+        </div>
+
+       <!-- /Login form -->
+    </div>
+    {% endblock %}
+
+Тест прошел. Допишем его валидным входом.
+
+.. code-block:: python
+
+        username = self.browser.find_element_by_name('username').send_keys('admin')
+        password = self.browser.find_element_by_name('password').send_keys('admin')
+        self.browser.find_element_by_name('enter').click()
+        header_text = self.browser.find_element_by_tag_name('h4').text
+        self.assertIn('Welcome!', header_text)
+        time.sleep(2)
+
+Добавим роутинг на страницу профиля на которую будет отправлен пользователь после авторизации.
+
+
+.. code-block:: python
+
+    url(r'^accounts/profile/$', 'blog.views.profile', name='my_profile'),
+
+Создадим простейшую вьюху.
+
+
+.. code-block:: python
+
+    def profile(request):
+        return render(request, 'profile.html', {})
+
+
+Добавим шаблон  blog/templates/profile.htmp
+
+.. code-block:: python
+
+    {% extends 'base.html' %}
+
+    {% block header %}
+       My profile
+    {% endblock %}
+
+    {% block content %}
+        <h4>Welcome!</h4>
+    {% endblock %}
+
+    {% block footer %}
+        <h3>This is footer</h3>
+    {% endblock %}
+
+
+Тест прошел. Допишем его имитируя нажатие на ссылку unlogin и ищем форму авторизации.
+
+.. code-block:: python
+
+        self.browser.find_element_by_id('logout').click()
+        time.sleep(2)
+        elf.browser.find_element_by_name('username')
+        self.browser.find_element_by_name('password')
+
+Вставим ссылку в шаблон
+
+.. code-block:: python
+
+     <a id="logout" href="{% url 'logout' %}">Logout</a>
+
+
+Тест прошел.
+
+
+
+

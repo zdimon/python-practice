@@ -1,0 +1,124 @@
+Коментарии к статье.
+####################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 8-3
+:category: Урок 8
+:authors: zdimon77@gmail.con
+
+
+Будем использовать стандартную `библиотеку джанги <https://docs.djangoproject.com/en/1.6/ref/contrib/comments/>`_ поэтому устанавливать ничего не надо!. 
+
+Install the comments framework by adding 'django.contrib.comments' to INSTALLED_APPS.
+
+
+.. code-block:: python
+    
+    INSTALLED_APPS = (
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'south',
+        'blog',
+        'registration',
+        'widget_tweaks',
+        'django.contrib.comments',
+        'django.contrib.site',
+
+    )
+
+Run manage.py syncdb so that Django will create the comment tables.
+
+.. code-block:: bash
+
+    manage.py syncdb
+
+Видим такую ошибку.
+
+.. image:: /images/8/3.png
+    :width: 700px
+
+Добавим пакет django.contrib.site в INSTALLED_APPS исли он так просит.
+
+Теперь после запуска видим что добавилось две таблицы.
+
+.. code-block:: bash
+
+    manage.py syncdb
+
+
+.. code-block:: bash
+
+     [...]
+     > django.contrib.comments
+     > django.contrib.sites
+
+В админке так же добавились новые разделы.
+
+
+.. image:: /images/8/4.png
+    :width: 700px
+
+Add the comment app’s URLs to your project’s urls.py:
+
+.. code-block:: python
+
+    url(r'^comments/', include('django.contrib.comments.urls')),
+
+Добавим новый сайт в админку.
+
+
+Добавим ID тестового сайта из пакета sites в settings.py.
+
+.. code-block:: python
+    
+    SITE_ID = 1
+
+Этот сайт для нас был автоматически создан при syncdb.
+
+.. image:: /images/8/5.png
+    :width: 700px
+
+Добавим код формы в шаблон blog/templates/item_show.html и выведем сами комментарии.
+
+
+
+
+.. code-block:: html
+
+        <h2> Комментарии </h2>
+        {% get_comment_list for item as comment_list %}
+        {% for comment in comment_list %}
+            <div class="well"> {{ comment }}</div>
+        {% endfor %}
+
+        
+         <div class="well">
+            {% if user.is_authenticated %}
+                {% get_comment_form for item as form %}
+                    <form action="{% comment_form_target %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.comment }}
+                    
+                    {{ form.content_type }}
+                    {{ form.object_pk }}
+                    {{ form.timestamp }}
+                    {{ form.security_hash }}
+                    <input type="hidden" name="next" value="{{ item.get_absolute_url }}" />
+                     <div class="form-body">
+                       <input type="submit" value="Add comment" id="id_submit" />
+                     </div>
+                    </form>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to leave a comment.</p>
+            {% endif %}
+         </div>
+
+.. image:: /images/8/6.png
+    :width: 700px
+
+

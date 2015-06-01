@@ -84,6 +84,26 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/urok-2.html">
 						<i class="icon-folder-open icon-large"></i>Урок 2
 					</a>
@@ -101,6 +121,26 @@
                   <li >
                     <a href="/category/urok-5.html">
 						<i class="icon-folder-open icon-large"></i>Урок 5
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
 					</a>
                   </li>
 
@@ -171,6 +211,70 @@ git reset --hard HEAD ...</p>
         </div>
         <hr />
         <div class="article">
+                <h1><a href="/i18n.html">I18n.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Set languages list and default language in settings.py.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">LANGUAGES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s">&#39;ru&#39;</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;Russian&#39;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s">&#39;en&#39;</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;English&#39;</span><span class="p">)),</span>
+<span class="p">)</span>
+<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s">&#39;ru-ru&#39;</span>
+</pre></div>
+<p>Define locale path in settings.py.</p>
+<div class="highlight"><pre><span class="n">LOCALE_PATHS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s">&#39;locale&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+<p>Make a language switcher in main template.</p>
+<div class="highlight"><pre>{% get_current_language as LANGUAGE_CODE %}
+        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav navbar-nav ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/i18n.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/links.html">Links.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p><a class="reference external" href="http://habrahabr.ru/company/wargaming/blog/221035/">http://habrahabr.ru/company/wargaming/blog/221035/</a></p>
+<p><a class="reference external" href="http://www.developerslane.com/10-best-python-frameworks-for-web-development/">http://www.developerslane.com/10-best-python-frameworks-for-web-development/</a></p>
+
+                        <a class="btn primary xsmall" href="/links.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
                 <h1><a href="/messages.html">Messages.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
@@ -188,23 +292,52 @@ git reset --hard HEAD ...</p>
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><p>'django.contrib.messages' is in INSTALLED_APPS.</p>
-<div class="highlight"><pre>from django.contrib import messages
-messages.add_message<span class="o">(</span>request, messages.INFO, <span class="s1">&#39;Hello world.&#39;</span><span class="o">)</span>
+                <div class="summary"><div class="highlight"><pre><span class="s">&#39;django.contrib.messages&#39;</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">INSTALLED_APPS</span><span class="o">.</span>
 
 
 
-            <span class="o">{</span>% <span class="k">for</span> message in messages %<span class="o">}</span>
-            &lt;div <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;alert alert-{{ message.tags }}&quot;</span>&gt;
-                    <span class="o">{{</span> message <span class="o">}}</span>
-            &lt;/div&gt;
-            <span class="o">{</span>% endfor %<span class="o">}</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+<span class="n">messages</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">messages</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Hello world.&#39;</span><span class="p">)</span>
+
+
+
+                            <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span> <span class="o">%</span><span class="p">}</span>
+                            <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s">&quot;alert alert-{{ message.tags }}&quot;</span><span class="o">&gt;</span>
+                                    <span class="p">{{</span> <span class="n">message</span> <span class="p">}}</span>
+                            <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                            <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 <div class="highlight"><pre> <span class="nc">.infIn</span> <span class="p">{</span>
   <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
   <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s</span> <span class="n">linear</span> <span class="k">both</span><span class="p">;</span>
   <span class="n">animation</span><span class="o">:</span> <span class="n">infAnim</span> <span class="m">0.5s ...</span></pre></div>
                         <a class="btn primary xsmall" href="/messages.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/nano.html">Nano.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>How do I enable syntax highlighting in nano?</p>
+<p>In home dir run this .</p>
+<p>echo 'include /usr/share/nano/sh.nanorc' &gt;&gt; .nanorc</p>
+
+                        <a class="btn primary xsmall" href="/nano.html">more ...</a>
                 </div>
         </div>
         <hr />
@@ -265,7 +398,7 @@ gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -fno-strict-aliasing -I/usr/include
         </div>
         <hr />
         <div class="article">
-                <h1><a href="/tips.html">Tips</a></h1>
+                <h1><a href="/queries.html">Queries.</a></h1>
                 <div class="well small"><footer class="post-info">
 <span class="label">Date</span>
 <abbr class="published" title="2015-02-11T00:00:00+01:00">
@@ -274,7 +407,7 @@ gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -fno-strict-aliasing -I/usr/include
 <span class="label">By</span>
 <a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
 <span class="label">Category</span>
-<a href="/category/tips.html"><i class="icon-folder-open"></i>tips</a>.
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
 
 
 <span class="label">Tags</span>
@@ -282,25 +415,62 @@ gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -fno-strict-aliasing -I/usr/include
 	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
 	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
 </footer><!-- /.post-info --></div>
-                <div class="summary"><ul class="simple">
-<li><a class="reference external" href="/tip-1.html">Запуск сервера разработки.</a></li>
-<li><a class="reference external" href="/postgres.html">Работа с postgresql.</a></li>
-<li><a class="reference external" href="/git.html">Работа с git.</a></li>
-<li><a class="reference external" href="/email.html">email</a></li>
-<li><a class="reference external" href="/protection.html">Code protection</a></li>
-<li><a class="reference external" href="/messages.html">Messages</a></li>
-</ul>
-<p>Email about exceptions.</p>
+                <div class="summary"><p>How to make join</p>
+<p>from django.db.models import Q
+User.objects.filter(Q(income__gte=5000) | Q(income__isnull=True))</p>
+<p>Like</p>
+<p>User.objects.filter(Q(income__gte=5000) | Q(name__contains=True))</p>
+<p>Raw</p>
+<p>Person.objects.raw('SELECT * FROM myapp_person'):</p>
+<p>Case insensitive</p>
+<p>User.objects.filter(Q(income__gte=5000) | Q(name__icontains=True))</p>
 
-                        <a class="btn primary xsmall" href="/tips.html">more ...</a>
+                        <a class="btn primary xsmall" href="/queries.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/supervisor.html">Supervisor.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/tips.html"><i class="icon-folder-open"></i>Tips</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>sudo apt-get install supervisor</p>
+<p>sudo nano /etc/supervisor/conf.d/webserver.conf</p>
+<p>[program:courses_webserver]
+command=/home/zdimon/co_ve/co/manage.py runserver 0.0.0.0:8888
+directory=/home/zdimon/co_ve/co
+environment=PATH=&quot;/home/zdimon/co_ve/bin&quot;
+user=zdimon
+autostart=true
+autorestart=true</p>
+<p>sudo nano /etc/supervisor/conf.d ...</p>
+                        <a class="btn primary xsmall" href="/supervisor.html">more ...</a>
                 </div>
         </div>
         <hr />
 
-                <section id="content" class="body">
-                <h1>Pages</h1>
-                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
-                </section>
+        <div class="pagination">
+        <ul>
+                        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+                        <li class="active"><a href="/category/tips.html">1</a></li>
+                        <li class=""><a href="/category/tips2.html">2</a></li>
+                        <li class="next"><a href="/category/tips2.html">Next &rarr;</a></li>
+        </ul>
+        </div>
+
         </div><!--/span-->
 
                

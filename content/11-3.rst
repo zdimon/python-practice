@@ -1,0 +1,94 @@
+Визуальный редактор в админке.
+##############################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 11-3
+:category: Урок 11
+:authors: zdimon77@gmail.con
+
+
+
+Будем вставлять `этот <https://pypi.python.org/pypi/django-ckeditor-updated>`_ редактор.
+
+
+Добавим пакет в requirements.txt.
+
+.. code-block:: bash
+
+    django-ckeditor-updated==4.4.4
+
+Установим пакет.
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
+Add ``ckeditor`` to your ``INSTALLED_APPS`` setting.
+
+Установим каталог для аплода файлов в settings.py.
+
+
+.. code-block:: python
+
+    CKEDITOR_UPLOAD_PATH = "uploads/"
+
+Определим там же варианты настроек инструментальной панели и путь к jquery.
+
+.. code-block:: python
+
+    CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+    CKEDITOR_CONFIGS = {
+
+        'small': {
+        'toolbar': 'Basic',
+        },
+
+        'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': 700,
+        },
+
+        'advanced': {
+        'toolbar': 'Uni',
+        'height': 300,
+        'width': 700,
+        },
+
+
+    }
+
+Добавим маршрутизацию в urls.py.
+
+.. code-block:: python
+
+    url(r'^ckeditor/', include('ckeditor.urls')),
+
+
+Заменим поле в модели.
+
+.. code-block:: python
+
+    from ckeditor.fields import RichTextField
+     [...]
+    description = RichTextField(config_name='default')
+
+
+
+
+.. image:: /images/11/2.png
+    :width: 700px
+    :alt: 8
+
+
+.. image:: /images/11/3.png
+    :width: 700px
+    :alt: 8
+
+.. image:: /images/11/4.png
+    :width: 700px
+    :alt: 8
+
+
+

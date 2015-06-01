@@ -1,0 +1,85 @@
+Страница статьи.
+################
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 8-2
+:category: Урок 8
+:authors: zdimon77@gmail.con
+
+Создадим в модели функцию, возвращающую ссылку на вьюху.
+
+*/blog/models.py*
+
+.. code-block:: python
+
+    class Item(models.Model):
+        [...]
+        def get_absolute_url(self):
+           return reverse("item_show", kwargs={"id": self.pk})
+
+
+Создадим саму вьюху *blog/views.py*.
+
+.. code-block:: python
+
+    def item_show(request,id):
+        item = Item.objects.get(pk=id)
+        return render(request, 'item_show.html', { 'item': item})
+
+
+Создадим шаблон blog/temlates/item_show.html
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+
+    {% block header %}
+        View Item
+    {% endblock %}
+
+    {% block content %}
+        <h1>{{ item.title }}</h1>
+
+         <div class="well">
+            {{ item.text }}
+         </div>
+        
+
+    {% endblock %}
+
+    {% block footer %}
+        <h3>This is footer</h3>
+    {% endblock %}
+
+Добавим правило роутинга в кортеж *o/o/urls.py*.
+
+
+.. code-block:: python
+
+     url(r'^item/show/(?P<id>[^\.]+).html', 'blog.views.item_show', name="item_show"),
+
+
+
+
+Добавим ссылку на эти страницы в шаблон blog/templates/catalog_show.html
+
+
+.. code-block:: html
+
+        {% for i in items %}
+            <div class="well"><a href="{{ i.get_absolute_url }}">{{ i.text }}</a></div>
+        {% endfor %}
+
+
+Итоги
+
+.. image:: /images/8/1.png
+    :width: 700px
+    :alt: 1
+
+.. image:: /images/8/2.png
+    :width: 700px
+    :alt: 2
+
+

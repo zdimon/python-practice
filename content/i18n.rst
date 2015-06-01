@@ -1,0 +1,170 @@
+I18n.
+#####
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: i18n
+:category: Tips
+:authors: zdimon77@gmail.con
+
+Set languages list and default language in settings.py.
+
+.. code-block:: python
+
+    from django.utils.translation import ugettext_lazy as _
+    [...]
+    LANGUAGES = (
+        ('ru', _('Russian')),
+        ('en', _('English')),
+    )
+    LANGUAGE_CODE = 'ru-ru'
+
+Define locale path in settings.py.
+
+.. code-block:: python
+
+    LOCALE_PATHS = (
+            join(BASE_DIR, 'locale'),
+        )
+
+
+Make a language switcher in main template.
+
+.. code-block:: html
+
+        {% get_current_language as LANGUAGE_CODE %}  
+                <ul class="nav navbar-nav" style="float: right">
+                        {% if LANGUAGE_CODE == 'en' %}
+                        <li>
+                            <a href="{% url 'main.views.change_language' %}?language=hy&next={{request.get_full_path}}">
+                               <img src="{% static "ru.png" %}" title="{% trans 'Russian' %}" />
+                            </a>
+                         </li>
+                        {% endif %}
+        
+                        {% if LANGUAGE_CODE == 'ru' %}
+                         <li>
+                            <a href="{% url 'main.views.change_language' %}?language=en&next={{request.get_full_path}}">
+                               <img src="{% static "uk.png" %}" title="{% trans 'English' %}" />
+                            </a>                           
+                        </li>
+                        {% endif %}
+                </ul>
+
+
+Make a view.
+
+.. code-block:: python
+
+    def change_language(request):
+        from django.utils import translation
+        from django.conf import settings
+        _next = request.REQUEST.get('next', None)
+        if not _next:
+            _next = request.META.get('HTTP_REFERER', None)
+
+        if not _next:
+            _next = '/'
+        # если уже есть языковой префикс URL, надо убрать его
+        for supported_language in settings.LANGUAGES:
+            prefix = '/%s/' % supported_language[0]
+            if _next.startswith(prefix):
+                _next = _next[len(prefix):]
+                break
+        language = request.REQUEST.get(u'language', None)
+        if _next == '/':
+            response = HttpResponseRedirect('/')
+        else:
+            response = HttpResponseRedirect('/%s/%s' % (language, _next))
+
+        if hasattr(request, 'session'):
+            request.session['django_language'] = language
+        else:
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+
+        translation.activate(language)
+        return response
+
+
+Make a url.
+
+.. code-block:: python
+
+    url(r'^change_language/', 'main.views.change_language', name='change_language'),
+
+
+Add the language indicator in urls.
+
+
+.. code-block:: python
+
+    from django.conf.urls.i18n import i18n_patterns
+    [...]
+
+    urlpatterns = patterns('',
+         url(r'^$', 'main.views.home', name='home'),
+    )
+
+    urlpatterns += i18n_patterns('',
+         url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'}, name='logout'),
+        
+    )
+
+Install rozetta.    
+
+.. code-block:: bash
+
+    django-rosetta==0.7.4
+
+
+Add 'rosetta' to the INSTALLED_APPS in your project’s settings.py
+
+Add an URL entry to your project’s urls.py, for example:
+
+.. code-block:: python
+
+    from django.conf import settings
+
+    if 'rosetta' in settings.INSTALLED_APPS:
+        urlpatterns += patterns('',
+            url(r'^rosetta/', include('rosetta.urls')),
+        )
+
+
+Make messages files.
+
+.. code-block:: bash
+
+    mkdir locale
+    ./manage.py makemessages -l en
+    ./manage.py makemessages -l ru
+
+
+Remake messages
+
+.. code-block:: bash
+
+    ./manage.py makemessages --all
+
+Compile message.
+
+.. code-block:: bash
+
+    ./manage.py compilemessages
+
+
+Suggestions.
+
+.. code-block:: python
+
+    ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
+    YANDEX_TRANSLATE_KEY = 'trnsl.1.1.20140521T130035Z.1014ae2799c685e3.97b1345108ab3a8520d96f730016a9dac947049b'
+    ROSETTA_MESSAGES_SOURCE_LANGUAGE_CODE = 'en'
+    ROSETTA_MESSAGES_SOURCE_LANGUAGE_NAME = 'English'
+
+
+http://localhost:8888/rosetta
+
+
+
+

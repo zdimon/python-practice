@@ -1,0 +1,58 @@
+Хлебные крошки.
+###############
+
+:date: 2015-02-11 
+:tags: python, tutorial, tests
+:slug: 8-5
+:category: Урок 8
+:authors: zdimon77@gmail.con
+
+
+Оформим их в виде блока, который будем переопределять в каждом шаблоне.
+
+First add this block of the bredcrums in the base template.
+
+.. code-block:: html
+ 
+        [...]        
+        <div class="col-md-10">
+            <div class="well"><a href="{% url 'home' %}" > Home </a>{% block bredcrumbs %}{% endblock %}</div>
+
+            {% block content %}{% endblock %}
+        [...]
+
+
+Переопределим блок в item_list_by_tag.html
+
+.. code-block:: html
+
+    {% extends 'base.html' %}
+
+    {% block bredcrumbs %} / Items by tag "{{ tag }}"{% endblock %}
+
+    [...]
+
+
+Переопределим блок в catalog_show.html
+
+.. code-block:: html
+
+    {% block bredcrumbs %} / My catalog {{ catalog.name }} {% endblock %}
+
+
+Переопределим блок в item_show.html
+
+.. code-block:: html
+
+   {% block bredcrumbs %} / <a href="{{ item.category.get_absolute_url }}">{{ item.category.name }}</a> /  {{ item.title }} {% endblock %}
+
+
+Enjoy!
+
+.. image:: /images/8/11.png
+    :width: 700px
+
+
+
+
+

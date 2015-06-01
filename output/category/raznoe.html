@@ -84,6 +84,26 @@
 					</a>
                   </li>
                   <li >
+                    <a href="/category/urok-10.html">
+						<i class="icon-folder-open icon-large"></i>Урок 10
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-11.html">
+						<i class="icon-folder-open icon-large"></i>Урок 11
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-12.html">
+						<i class="icon-folder-open icon-large"></i>Урок 12
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-13.html">
+						<i class="icon-folder-open icon-large"></i>Урок 13
+					</a>
+                  </li>
+                  <li >
                     <a href="/category/urok-2.html">
 						<i class="icon-folder-open icon-large"></i>Урок 2
 					</a>
@@ -103,6 +123,26 @@
 						<i class="icon-folder-open icon-large"></i>Урок 5
 					</a>
                   </li>
+                  <li >
+                    <a href="/category/urok-6.html">
+						<i class="icon-folder-open icon-large"></i>Урок 6
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-7.html">
+						<i class="icon-folder-open icon-large"></i>Урок 7
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-8.html">
+						<i class="icon-folder-open icon-large"></i>Урок 8
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/urok-9.html">
+						<i class="icon-folder-open icon-large"></i>Урок 9
+					</a>
+                  </li>
 
                           <ul class="nav pull-right">
                                 <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
@@ -118,6 +158,128 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+        <div class="article">
+                <h1><a href="/ajax.html">Использование AJAX запросов.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Wi will use <a class="reference external" href="https://github.com/yceruto/django-ajax">this</a> library.</p>
+<p>Requirements.</p>
+<div class="highlight"><pre><span class="nv">djangoajax</span><span class="o">==</span>2.2.12
+</pre></div>
+<p>Add app in INSTALL_APPS.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="p">[</span><span class="o">....</span><span class="p">]</span>
+    <span class="s">&#39;django_ajax&#39;</span><span class="p">,</span>
+
+<span class="p">)</span>
+</pre></div>
+<p>Create test view for the ajax requests mymodule/ajax.py.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django_ajax.decorators</span> <span class="kn">import</span> <span class="n">ajax</span>
+
+<span class="nd">@ajax</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;inner-fragments&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">&#39;#apponent_cam&#39;</span><span class="p">:</span> <span class="s">&#39;test ajax&#39;</span><span class="p">,</span>
+             <span class="p">},</span>
+           <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+<p>Create url.</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^ajax/test$&#39;</span><span class="p">,</span> <span class="s">&#39;mymodule.ajax ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/ajax.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/ajax-upload.html">Ajax upload.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Requirements.</p>
+<blockquote>
+-e git+https://github.com/zmathew/django-ajax-upload-widget.git#egg=ajax_upload</blockquote>
+<p>Copy js libs ajax_upload from packeges to our static folder in any app.</p>
+<p>Add to INSTALL_APPS.</p>
+<div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="s">&#39;ajax_upload&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<p>Model.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Images</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">u&#39;Image&#39;</span><span class="p">),</span> <span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;course_images&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Form.</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">ajax_upload.widgets</span> <span class="kn">import ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/ajax-upload.html">more ...</a>
+                </div>
+        </div>
+        <hr />
+        <div class="article">
+                <h1><a href="/custom-admin-view.html">Custom admin view.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Some admin class.</p>
+<div class="highlight"><pre><span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span> <span class="s">&#39;export_to_mirror_link&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">export_to_mirror</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">issue_id</span><span class="p">):</span>
+    <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&#39;Export is runing!&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&#39;admin:journal_issue_changelist&#39;</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">export_to_mirror_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s">&#39;admin:export_to_mirror&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s">u&#39;&lt;a href=&quot;{0}&quot;&gt;{1}&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">u&#39;export to mirror ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/custom-admin-view.html">more ...</a>
+                </div>
+        </div>
+        <hr />
         <div class="article">
                 <h1><a href="/nginx.html">Установка и сборка nginx.</a></h1>
                 <div class="well small"><footer class="post-info">
@@ -156,10 +318,46 @@ deb-src http://nginx.org/packages/ubuntu/ trusty nginx
                 </div>
         </div>
         <hr />
+        <div class="article">
+                <h1><a href="/tornado.html">Запуск торнадо сервера в режиме вебсокета.</a></h1>
+                <div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-02-11T00:00:00+01:00">
+        <i class="icon-calendar"></i>ср 11 лютий 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/zdimon77gmailcon.html"><i class="icon-user"></i>zdimon77@gmail.con</a>
+<span class="label">Category</span>
+<a href="/category/raznoe.html"><i class="icon-folder-open"></i>Разное</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+	<a href="/tag/tutorial.html"><i class="icon-tag"></i>tutorial</a>
+	<a href="/tag/tests.html"><i class="icon-tag"></i>tests</a>
+</footer><!-- /.post-info --></div>
+                <div class="summary"><p>Django with tornado as wsgi server.</p>
+<p>tserver.py</p>
+<div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tornado.httpserver</span>
+<span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+<span class="kn">import</span> <span class="nn">tornado.wsgi</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">django.core.handlers.wsgi</span>
+<span class="kn">from</span> <span class="nn">config.settings</span> <span class="kn">import</span> <span class="n">BASE_DIR</span>
+<span class="kn">from</span> <span class="nn">tornado</span> <span class="kn">import</span> <span class="n">web</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;config.settings ...</span></pre></div>
+                        <a class="btn primary xsmall" href="/tornado.html">more ...</a>
+                </div>
+        </div>
+        <hr />
 
                 <section id="content" class="body">
                 <h1>Pages</h1>
-                        <li><a href="/pages/python, django.html">Практика python &amp; django</a></li>
+                        <li><a href="/pages/python, курсы.html">Курс обучения языку python</a></li>
                 </section>
         </div><!--/span-->
 
